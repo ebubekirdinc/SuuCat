@@ -42,11 +42,11 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSwaggerUi3(settings =>
-{
-    settings.Path = "/api";
-    settings.DocumentPath = "/api/specification.json";
-});
+// app.UseSwaggerUi3(settings =>
+// {
+//     settings.Path = "/api";
+//     settings.DocumentPath = "/api/specification.json";
+// });
 
 app.UseRouting();
 
