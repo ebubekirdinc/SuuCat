@@ -1,12 +1,19 @@
 ﻿using Account.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Microsoft.AspNetCore.Authorization;
+using Account.WebUI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Account.WebUI.Controllers;
+namespace WebUI.Controllers;
 
+/// <summary>
+/// Weather forecast controller
+/// </summary>
+[Area("WebApi")]
 public class WeatherForecastController : ApiControllerBase
 {
-    [Area("WebApi")]
+    /// <summary>
+    /// WeatherForecast Get
+    /// </summary> 
+    /// <returns></returns>
     [HttpGet, Route("~/WebApi/WeatherForecast/Get")]
     // [Authorize]
     public async Task<IEnumerable<WeatherForecast>> Get()

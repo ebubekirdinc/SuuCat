@@ -1,11 +1,11 @@
-﻿using Account.Application.Common.Interfaces;
+﻿using System.Reflection;
+using Account.Application.Common.Interfaces;
 using Account.Infrastructure.Persistence;
 using Account.WebUI.Filters;
 using Account.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-// using NSwag;
-// using NSwag.Generation.Processors.Security;
+using Microsoft.OpenApi.Models;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -23,8 +23,8 @@ public static class ConfigureServices
             .AddDbContextCheck<ApplicationDbContext>();
 
         services.AddControllersWithViews(options =>
-            options.Filters.Add<ApiExceptionFilterAttribute>())
-                .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
+                options.Filters.Add<ApiExceptionFilterAttribute>())
+            .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
         services.AddRazorPages();
 
@@ -32,20 +32,26 @@ public static class ConfigureServices
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
-        // services.AddOpenApiDocument(configure =>
-        // {
-        //     configure.Title = "Account API";
-        //     configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-        //     {
-        //         Type = OpenApiSecuritySchemeType.ApiKey,
-        //         Name = "Authorization",
-        //         In = OpenApiSecurityApiKeyLocation.Header,
-        //         Description = "Type into the textbox: Bearer {your JWT token}."
-        //     });
-        //
-        //     configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-        // });
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Account Microservice", Version = "v1" });
+            // To Enable authorization using Swagger (JWT)    
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"",
+            });
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement { { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, Array.Empty<string>() } });
 
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
+        });
+ 
         return services;
     }
 }
