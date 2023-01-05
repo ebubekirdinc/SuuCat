@@ -26,7 +26,7 @@ public class RequestLoggerTests
     {
         _currentUserService.Setup(x => x.UserId).Returns(Guid.NewGuid().ToString());
 
-        var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
+        var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _currentUserService.Object);
 
         await requestLogger.Process(new CreateTodoItemCommand { ListId = 1, Title = "title" }, new CancellationToken());
 
@@ -36,7 +36,7 @@ public class RequestLoggerTests
     [Test]
     public async Task ShouldNotCallGetUserNameAsyncOnceIfUnauthenticated()
     {
-        var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
+        var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _currentUserService.Object);
 
         await requestLogger.Process(new CreateTodoItemCommand { ListId = 1, Title = "title" }, new CancellationToken());
 
