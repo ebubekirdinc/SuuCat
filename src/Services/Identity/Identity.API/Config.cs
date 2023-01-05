@@ -12,7 +12,7 @@ namespace Identity.API
     {
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
-            new ApiResource("resource_account") { Scopes = { "accountfull_scope" } },
+            new ApiResource("resource_assessment") { Scopes = { "assessmentfull_scope" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -28,7 +28,7 @@ namespace Identity.API
             {
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
-                new ApiScope("accountfull_scope", "Full permission for acount"),
+                new ApiScope("assessmentfull_scope", "Full permission for acount"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -39,10 +39,10 @@ namespace Identity.API
                 new Client
                 {
                     ClientName = "Asp.Net Core MVC",
-                    ClientId = "accountClient",
+                    ClientId = "assessmentClient",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "accountfull_scope", IdentityServerConstants.LocalApi.ScopeName },
+                    AllowedScopes = { "assessmentfull_scope", IdentityServerConstants.LocalApi.ScopeName },
                 },
                 
                 // new Client
@@ -51,7 +51,7 @@ namespace Identity.API
                 //     ClientId = "WebMvcClient",
                 //     ClientSecrets = { new Secret("secret".Sha256()) },
                 //     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                //     AllowedScopes = { "accountfull_scope", IdentityServerConstants.LocalApi.ScopeName },
+                //     AllowedScopes = { "assessmentfull_scope", IdentityServerConstants.LocalApi.ScopeName },
                 // },
 
                 // m2m client credentials flow client

@@ -3,7 +3,7 @@
 
 
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Identity.API.Quickstart.Account
 {
     public class RedirectViewModel
     {
