@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-
 using Assessment.Application.Common.Interfaces;
 
-namespace Assessment.WebUI.Services;
+namespace WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

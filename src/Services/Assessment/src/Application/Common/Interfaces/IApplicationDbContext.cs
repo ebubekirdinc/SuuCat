@@ -8,6 +8,7 @@ public interface IApplicationDbContext
     DbSet<TodoList> TodoLists { get; }
 
     DbSet<TodoItem> TodoItems { get; }
+    DbSet<MainCategory> MainCategories { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

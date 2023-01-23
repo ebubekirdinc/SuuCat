@@ -1,9 +1,8 @@
 ﻿using Assessment.Application.Common.Exceptions;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Assessment.WebUI.Filters;
+namespace WebUI.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

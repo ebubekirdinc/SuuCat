@@ -1,4 +1,8 @@
+using Assessment.Application;
+using Assessment.Infrastructure;
 using Assessment.Infrastructure.Persistence;
+using WebUI;
+using WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +14,7 @@ builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
         options.Authority = "https://localhost:5001";
-        options.Audience = "resource_assessment";
+        options.Audience = "resource_assessment"; 
         // options.TokenValidationParameters = new TokenValidationParameters
         // {
         //     ValidateAudience = false
@@ -38,6 +42,7 @@ else
     app.UseHsts();
 }
 
+app.ConfigureCustomExceptionMiddleware();
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();

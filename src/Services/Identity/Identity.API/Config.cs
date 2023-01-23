@@ -4,6 +4,7 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityModel;
 using IdentityServer4;
 
 namespace Identity.API
@@ -12,15 +13,17 @@ namespace Identity.API
     {
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
-            new ApiResource("resource_assessment") { Scopes = { "assessmentfull_scope" } },
+            new ApiResource("resource_assessment",new [] { JwtClaimTypes.Role }) { Scopes = { "assessmentfull_scope" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
-                new IdentityResources.OpenId(),
+                new IdentityResources.Email(),
+                new IdentityResources.OpenId(), // sub
                 new IdentityResources.Profile(),
+                new IdentityResource() { Name = "roles", DisplayName = "Roles", Description = "User roles", UserClaims = new[] { "role" } }
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -28,8 +31,8 @@ namespace Identity.API
             {
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
-                new ApiScope("assessmentfull_scope", "Full permission for acount"),
-                new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
+                new ApiScope("assessmentfull_scope", "Full permission for assessment"),
+                new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
             };
 
         public static IEnumerable<Client> Clients =>
@@ -39,21 +42,34 @@ namespace Identity.API
                 new Client
                 {
                     ClientName = "Asp.Net Core MVC",
-                    ClientId = "assessmentClient",
+                    ClientId = "WebMvcClient",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = { "assessmentfull_scope", IdentityServerConstants.LocalApi.ScopeName },
                 },
-                
-                // new Client
-                // {
-                //     ClientName = "Asp.Net Core MVC",
-                //     ClientId = "WebMvcClient",
-                //     ClientSecrets = { new Secret("secret".Sha256()) },
-                //     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                //     AllowedScopes = { "assessmentfull_scope", IdentityServerConstants.LocalApi.ScopeName },
-                // },
-
+                new Client
+                {
+                    ClientName = "Asp.Net Core MVC",
+                    ClientId = "WebMvcClientForUserPass",
+                    AllowOfflineAccess = true, // refresh token
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.LocalApi.ScopeName, 
+                        "roles",
+                        "assessmentfull_scope",
+                        IdentityServerConstants.StandardScopes.OfflineAccess, // refresh token
+                    },
+                    AccessTokenLifetime = 1 * 60 * 60,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    // AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds,
+                    RefreshTokenUsage = TokenUsage.ReUse
+                },
+ 
                 // m2m client credentials flow client
                 new Client
                 {

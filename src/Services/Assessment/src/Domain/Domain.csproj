@@ -5,7 +5,7 @@
         <RootNamespace>Assessment.Domain</RootNamespace>
         <AssemblyName>Assessment.Domain</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

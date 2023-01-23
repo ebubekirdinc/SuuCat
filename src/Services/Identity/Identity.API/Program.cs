@@ -11,8 +11,10 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using Identity.API.Data;
 using Identity.API.Models;
+using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +57,29 @@ namespace Identity.API
 
                     if (!userManager.Users.Any())
                     {
-                        userManager.CreateAsync(new ApplicationUser { UserName = "testUser", Email = "testUser@gmail.com"  }, "Password12*").Wait();
+                        var testUser = new ApplicationUser { UserName = "testUser", Email = "testUser@gmail.com" };
+                        userManager.CreateAsync(testUser, "Password12*").Wait();
+
+                        userManager.AddClaimsAsync(testUser, new Claim[]
+                        {
+                            new Claim(JwtClaimTypes.Name, "Test User"),
+                            new Claim(JwtClaimTypes.GivenName, "TestUser"),
+                            new Claim(JwtClaimTypes.FamilyName, "Test"),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                            new Claim(JwtClaimTypes.Role, "user")
+                        }).Wait();
+
+                        var adminUser = new ApplicationUser { UserName = "adminUser", Email = "adminUser@gmail.com" };
+                        userManager.CreateAsync(adminUser, "Password12*").Wait();
+
+                        userManager.AddClaimsAsync(adminUser, new Claim[]
+                        {
+                            new Claim(JwtClaimTypes.Name, "Admin User"),
+                            new Claim(JwtClaimTypes.GivenName, "AdminUser"),
+                            new Claim(JwtClaimTypes.FamilyName, "Admin"),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                            new Claim(JwtClaimTypes.Role, "admin")
+                        }).Wait();
                     }
                 }
 
@@ -77,9 +101,6 @@ namespace Identity.API
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

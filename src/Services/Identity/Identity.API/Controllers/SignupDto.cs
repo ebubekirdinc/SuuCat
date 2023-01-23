@@ -12,8 +12,6 @@ namespace Identity.API.Controllers
 
         [Required]
         public string Password { get; set; }
-
-        [Required]
-        public string City { get; set; }
+ 
     }
 }

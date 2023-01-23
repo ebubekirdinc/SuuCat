@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Assessment.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 /// <summary>
 /// Weather forecast controller

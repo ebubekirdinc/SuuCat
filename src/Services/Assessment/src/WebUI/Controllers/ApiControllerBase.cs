@@ -1,8 +1,7 @@
 ﻿using MediatR;
-
 using Microsoft.AspNetCore.Mvc;
 
-namespace Assessment.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 [ApiController]
 [Route("[area]/[controller]/[action]")]

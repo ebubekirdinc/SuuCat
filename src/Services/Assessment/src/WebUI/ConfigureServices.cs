@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using Assessment.Application.Common.Interfaces;
 using Assessment.Infrastructure.Persistence;
-using Assessment.WebUI.Filters;
-using Assessment.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using WebUI.Filters;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {
@@ -22,8 +22,10 @@ public static class ConfigureServices
         services.AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>();
 
-        services.AddControllersWithViews(options =>
-            options.Filters.Add<ApiExceptionFilterAttribute>())
+        services.AddControllersWithViews(
+            //     options =>
+            // options.Filters.Add<ApiExceptionFilterAttribute>()
+            )
                 .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
         services.AddRazorPages();

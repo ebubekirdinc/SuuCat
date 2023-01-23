@@ -1,7 +1,8 @@
 ﻿using Assessment.Domain.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediatR;
+namespace Assessment.Infrastructure.Common;
 
 public static class MediatorExtensions
 {

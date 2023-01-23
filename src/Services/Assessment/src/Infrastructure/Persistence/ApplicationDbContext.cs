@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Assessment.Application.Common.Interfaces;
 using Assessment.Domain.Entities;
+using Assessment.Infrastructure.Common;
 using Assessment.Infrastructure.Identity;
 using Assessment.Infrastructure.Persistence.Interceptors;
 using Duende.IdentityServer.EntityFramework.Options;
@@ -29,6 +30,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<TodoList> TodoLists => Set<TodoList>();
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+    public DbSet<MainCategory> MainCategories => Set<MainCategory>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
