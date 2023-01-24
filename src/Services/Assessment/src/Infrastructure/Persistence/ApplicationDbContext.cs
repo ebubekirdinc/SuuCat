@@ -31,6 +31,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<MainCategory> MainCategories => Set<MainCategory>();
+    public DbSet<Category> Categories => Set<Category>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
