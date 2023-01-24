@@ -1,6 +1,6 @@
 ﻿namespace Shared.Dto;
 
-public class ApiResult<T>
+public class ApiResult<T>  
 {
     public bool Success { get; set; }
     public string Message { get; set; }

@@ -7,6 +7,6 @@ public class CreateMainCategoryCommandValidator : AbstractValidator<CreateMainCa
     public CreateMainCategoryCommandValidator()
     {
         RuleFor(v => v.Name).MaximumLength(100).NotEmpty();
-        RuleFor(v => v.Description).MaximumLength(200).NotEmpty();
+        RuleFor(v => v.Description).MaximumLength(200).When(x => string.IsNullOrEmpty(x.Description));
     }
 }
