@@ -34,15 +34,15 @@ public class CategoriesController : ApiControllerBase
     /// Updates Category by given id
     /// </summary> 
     /// <returns></returns>
-    [HttpPatch, Route("~/AdminApi/Categories/{CategoryId:int}")]
+    [HttpPatch, Route("~/AdminApi/Categories/{categoryId:int}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(ApiResult<UpdateCategoryVm>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResult<UpdateCategoryVm>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResult<UpdateCategoryVm>), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResult<UpdateCategoryVm>), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ApiResult<UpdateCategoryVm>>> UpdateCategory(UpdateCategoryCommand command, int CategoryId)
+    public async Task<ActionResult<ApiResult<UpdateCategoryVm>>> UpdateCategory(UpdateCategoryCommand command, int categoryId)
     {
-        command.Id = CategoryId;
+        command.Id = categoryId;
 
         return await Mediator.Send(command);
     }
@@ -51,13 +51,13 @@ public class CategoriesController : ApiControllerBase
     /// Deletes Category by given id
     /// </summary> 
     /// <returns></returns>
-    [HttpDelete, Route("~/AdminApi/Categories/{CategoryId:int}")]
+    [HttpDelete, Route("~/AdminApi/Categories/{categoryId:int}")]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ApiResult<string>>> UpdateCategory(int CategoryId)
+    public async Task<ActionResult<ApiResult<string>>> UpdateCategory(int categoryId)
     {
-        return await Mediator.Send(new DeleteCategoryCommand { Id = CategoryId });
+        return await Mediator.Send(new DeleteCategoryCommand { Id = categoryId });
     }
 }

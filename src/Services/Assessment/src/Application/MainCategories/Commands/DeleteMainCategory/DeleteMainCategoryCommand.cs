@@ -25,9 +25,9 @@ public class DeleteMainCategoryCommand : IRequest<ApiResult<string>>
             if (mainCategory == null)
                 throw new NotFoundException("MainCategory not found", request.Id);
 
-            var categories = await _context.Categories.Where(x => x.Id == request.Id && x.Deleted == null).ToListAsync(cancellationToken: cancellationToken);
+            var categories = await _context.Categories.Where(x => x.ParentCategoryId == request.Id && x.Deleted == null).ToListAsync(cancellationToken: cancellationToken);
             if (categories.Any())
-                throw new BadRequestException("MainCategory has categories");
+                throw new BadRequestException("MainCategory has categories, delete them first");
 
             _context.MainCategories.Remove(mainCategory);
 

@@ -25,7 +25,9 @@ public class DeleteCategoryCommand : IRequest<ApiResult<string>>
             if (category == null)
                 throw new NotFoundException("Category not found", request.Id);
 
-            // todo check if category has any questions
+            var questions = await _context.Questions.Where(x => x.CategoryId == request.Id && x.Deleted == null).ToListAsync(cancellationToken: cancellationToken);
+            if (questions.Any())
+                throw new BadRequestException("Category has questions, delete them first");
             
             _context.Categories.Remove(category);
 

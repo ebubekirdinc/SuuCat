@@ -2,13 +2,9 @@
 using Assessment.Application.Common.Interfaces;
 using Assessment.Domain.Entities;
 using Assessment.Infrastructure.Common;
-using Assessment.Infrastructure.Identity;
 using Assessment.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace Assessment.Infrastructure.Persistence;
 
@@ -18,9 +14,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
 
     public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options, 
+        DbContextOptions<ApplicationDbContext> options,
         IMediator mediator,
-        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor) 
+        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor)
         : base(options)
     {
         _mediator = mediator;
@@ -32,6 +28,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<MainCategory> MainCategories => Set<MainCategory>();
     public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Question> Questions => Set<Question>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
