@@ -5,12 +5,14 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Identity.API.Models;
 using IdentityServer4;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Shared.Events;
 
 namespace Identity.API.Controllers
 {
@@ -20,10 +22,13 @@ namespace Identity.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public AuthController(UserManager<ApplicationUser> userManager)
+        public AuthController(UserManager<ApplicationUser> userManager, IPublishEndpoint publishEndpoint)
         {
             _userManager = userManager;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpPost, Route("~/Api/Auth/SignUp")]
@@ -44,7 +49,9 @@ namespace Identity.API.Controllers
             {
                 return BadRequest(result.Errors.Select(x => x.Description).ToList());
             }
-
+            
+            await _publishEndpoint.Publish<UserCreatedEvent>(new UserCreatedEvent { UserId = user.Id, Email = user.Email });
+            
             return Ok();
         }
 

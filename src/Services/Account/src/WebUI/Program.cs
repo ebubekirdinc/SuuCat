@@ -1,3 +1,5 @@
+using Account.Application;
+using Account.Infrastructure;
 using Account.Infrastructure.Persistence;
 using WebUI;
 using WebUI.Middlewares;
