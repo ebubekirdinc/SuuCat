@@ -14,6 +14,7 @@ namespace Identity.API
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
             new ApiResource("resource_assessment",new [] { JwtClaimTypes.Role }) { Scopes = { "assessmentfull_scope" } },
+            new ApiResource("resource_account",new [] { JwtClaimTypes.Role }) { Scopes = { "accountfull_scope" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -32,6 +33,7 @@ namespace Identity.API
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
                 new ApiScope("assessmentfull_scope", "Full permission for assessment"),
+                new ApiScope("accountfull_scope", "Full permission for account"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
             };
 
@@ -45,7 +47,7 @@ namespace Identity.API
                     ClientId = "WebMvcClient",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "assessmentfull_scope", IdentityServerConstants.LocalApi.ScopeName },
+                    AllowedScopes = { "assessmentfull_scope", "accountfull_scope", IdentityServerConstants.LocalApi.ScopeName },
                 },
                 new Client
                 {
@@ -62,6 +64,7 @@ namespace Identity.API
                         IdentityServerConstants.LocalApi.ScopeName, 
                         "roles",
                         "assessmentfull_scope",
+                        "accountfull_scope",
                         IdentityServerConstants.StandardScopes.OfflineAccess, // refresh token
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
