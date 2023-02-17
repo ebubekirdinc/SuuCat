@@ -17,13 +17,22 @@ public class UserCreatedEventComsumer : IConsumer<UserCreatedEvent>
 
     public async Task Consume(ConsumeContext<UserCreatedEvent> context)
     {
+        if (string.IsNullOrEmpty(context.Message.UserId))
+        {
+            return;
+        }
+
         var userExists = await _context.Users.AnyAsync(x => x.UserId == context.Message.UserId);
         if (userExists)
         {
             return;
         }
 
-        var user = new User { Email = context.Message.Email, UserId = context.Message.UserId };
+        var user = new User {
+            Email = context.Message.Email, 
+            UserId = context.Message.UserId,
+            UserName = context.Message.UserName
+        };
 
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();

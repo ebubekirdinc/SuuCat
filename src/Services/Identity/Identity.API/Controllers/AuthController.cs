@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Shared.Dto;
 using Shared.Events;
 
 namespace Identity.API.Controllers
@@ -22,7 +23,7 @@ namespace Identity.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        
+
         private readonly IPublishEndpoint _publishEndpoint;
 
         public AuthController(UserManager<ApplicationUser> userManager, IPublishEndpoint publishEndpoint)
@@ -32,6 +33,7 @@ namespace Identity.API.Controllers
         }
 
         [HttpPost, Route("~/Api/Auth/SignUp")]
+        [AllowAnonymous]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -39,7 +41,7 @@ namespace Identity.API.Controllers
         {
             var user = new ApplicationUser
             {
-                UserName = signupDto.UserName,
+                UserName = signupDto.Email,
                 Email = signupDto.Email,
             };
 
@@ -49,10 +51,15 @@ namespace Identity.API.Controllers
             {
                 return BadRequest(result.Errors.Select(x => x.Description).ToList());
             }
-            
-            await _publishEndpoint.Publish<UserCreatedEvent>(new UserCreatedEvent { UserId = user.Id, Email = user.Email });
-            
-            return Ok();
+
+            await _publishEndpoint.Publish<UserCreatedEvent>(new UserCreatedEvent
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                UserName = user.UserName
+            });
+
+            return Ok(new ApiResult<string>(true, "User created successfully"));;
         }
 
         [HttpGet, Route("~/Api/Auth/GetUser")]
@@ -69,16 +76,16 @@ namespace Identity.API.Controllers
 
             return Ok(new { Id = user.Id, UserName = user.UserName, Email = user.Email });
         }
-        
+
         [Authorize(Roles = "admin")]
         [HttpGet, Route("~/Api/Auth/OnlyAdmin")]
         public async Task<IActionResult> OnlyAdmin()
         {
             await LogTokenAndClaims();
-            
+
             return Ok();
         }
-        
+
         private async Task LogTokenAndClaims()
         {
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
