@@ -1,7 +1,7 @@
 ﻿using Account.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Account.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 public class WeatherForecastController : ApiControllerBase
 {

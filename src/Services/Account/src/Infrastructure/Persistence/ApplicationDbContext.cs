@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Account.Application.Common.Interfaces;
 using Account.Domain.Entities;
+using Account.Infrastructure.Common;
 using Account.Infrastructure.Persistence.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

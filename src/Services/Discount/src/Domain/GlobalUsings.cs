@@ -1,0 +1,1 @@
+﻿global using Discount.Domain.Common; 

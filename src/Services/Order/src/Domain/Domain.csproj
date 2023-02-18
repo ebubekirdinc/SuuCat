@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>Order.Domain</RootNamespace>
+        <AssemblyName>Order.Domain</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Entities" />
+      <Folder Include="Enums" />
+      <Folder Include="Events" />
+      <Folder Include="Exceptions" />
+      <Folder Include="ValueObjects" />
+    </ItemGroup>
+
+</Project>

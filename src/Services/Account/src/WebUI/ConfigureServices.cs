@@ -1,11 +1,10 @@
 ﻿using System.Reflection;
 using Account.Application.Common.Interfaces;
 using Account.Infrastructure.Persistence;
-using Account.WebUI.Filters;
-using Account.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using WebUI.Services;
 
 namespace WebUI;
 
