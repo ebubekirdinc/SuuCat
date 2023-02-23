@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using MassTransit;
+using Payment.Infrastructure.Consumers;
+using Shared.Constants;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -41,6 +44,25 @@ public static class ConfigureServices
         services.AddAuthorization(options =>
             options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator")));
 
+        services.AddMassTransit(x =>
+        {
+            x.AddConsumer<StockReservedRequestPaymentConsumer>();
+
+            x.UsingRabbitMq((context, cfg) =>
+            {
+                cfg.Host(configuration["RabbitMQUrl"], "/", host =>
+                {
+                    host.Username("user");
+                    host.Password("password");
+                });
+
+                cfg.ReceiveEndpoint(QueuesConsts.PaymentStockReservedRequestQueueName, e =>
+                {
+                    e.ConfigureConsumer<StockReservedRequestPaymentConsumer>(context);
+                });
+            });
+        });
+        
         return services;
     }
 }

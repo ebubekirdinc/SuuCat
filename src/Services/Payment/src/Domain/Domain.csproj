@@ -5,7 +5,7 @@
         <RootNamespace>Payment.Domain</RootNamespace>
         <AssemblyName>Payment.Domain</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

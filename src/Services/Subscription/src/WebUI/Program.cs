@@ -1,3 +1,4 @@
+using Subscription.Infrastructure;
 using Subscription.Infrastructure.Persistence;
 using WebUI.Middlewares;
 

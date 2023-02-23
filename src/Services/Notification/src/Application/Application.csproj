@@ -5,7 +5,7 @@
         <RootNamespace>Notification.Application</RootNamespace>
         <AssemblyName>Notification.Application</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

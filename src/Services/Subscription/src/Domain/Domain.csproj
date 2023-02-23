@@ -5,7 +5,7 @@
         <RootNamespace>Subscription.Domain</RootNamespace>
         <AssemblyName>Subscription.Domain</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,7 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Entities" />
       <Folder Include="Enums" />
       <Folder Include="Events" />
       <Folder Include="Exceptions" />

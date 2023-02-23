@@ -26,6 +26,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
 
+    public DbSet<Domain.Entities.Order> Orders => Set<Domain.Entities.Order>(); 
  
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -39,6 +40,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
     }
+
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

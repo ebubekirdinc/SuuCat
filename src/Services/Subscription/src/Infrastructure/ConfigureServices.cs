@@ -1,14 +1,18 @@
-﻿using Subscription.Application.Common.Interfaces; 
-using Subscription.Infrastructure.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Subscription.Application.Common.Interfaces;
+using Subscription.Application.Common.Interfaces.MassTransit;
+using Subscription.Infrastructure.MassTransit;
 using Subscription.Infrastructure.Persistence;
 using Subscription.Infrastructure.Persistence.Interceptors;
 using Subscription.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using MassTransit;
+using Shared.Constants;
+using Subscription.Infrastructure.Consumers;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Subscription.Infrastructure;
 
 public static class ConfigureServices
 {
@@ -41,6 +45,33 @@ public static class ConfigureServices
         services.AddAuthorization(options =>
             options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator")));
 
+        services.AddMassTransit(x =>
+        {
+            x.AddConsumer<OrderCreatedEventConsumer>();
+            x.AddConsumer<StockRollBackMessageConsumer>();
+
+            x.UsingRabbitMq((context, cfg) =>
+            {
+                cfg.Host(configuration["RabbitMQUrl"], "/", host =>
+                {
+                    host.Username("user");
+                    host.Password("password");
+                });
+
+                cfg.ReceiveEndpoint(QueuesConsts.StockOrderCreatedEventQueueName, e =>
+                {
+                    e.ConfigureConsumer<OrderCreatedEventConsumer>(context);
+                });
+
+                cfg.ReceiveEndpoint(QueuesConsts.StockRollBackMessageQueueName, e =>
+                {
+                    e.ConfigureConsumer<StockRollBackMessageConsumer>(context);
+                });
+            });
+        });
+        
+        services.AddScoped<IMassTransitService, MassTransitService>();
+        
         return services;
     }
 }

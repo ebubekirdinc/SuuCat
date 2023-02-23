@@ -5,7 +5,7 @@
         <RootNamespace>Discount.Application</RootNamespace>
         <AssemblyName>Discount.Application</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

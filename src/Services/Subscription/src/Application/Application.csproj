@@ -5,7 +5,7 @@
         <RootNamespace>Subscription.Application</RootNamespace>
         <AssemblyName>Subscription.Application</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

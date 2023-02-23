@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
       <RootNamespace>Assessment.WebUI.AcceptanceTests</RootNamespace>
       <AssemblyName>Assessment.WebUI.AcceptanceTests</AssemblyName>
-      <Nullable>enable</Nullable>
+      <Nullable>disable</Nullable>
       <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
