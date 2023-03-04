@@ -43,37 +43,53 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
                     context.Saga.TotalPrice = context.Message.TotalPrice;
                 })
                 .Then(context => { Console.WriteLine($"Before OrderCreatedRequestEvent : {context.Saga}"); })
-                .Publish(context => new OrderCreatedEvent(context.Saga.CorrelationId)
-                {
-                    OrderItems = context.Message.OrderItems
-                })
+                .Publish(
+                    context => new OrderCreatedEvent(context.Saga.CorrelationId)
+                    {
+                        OrderItems = context.Message.OrderItems
+                    })
                 .TransitionTo(OrderCreated)
                 .Then(context => { Console.WriteLine($"After OrderCreatedRequestEvent : {context.Saga}"); }));
 
         During(OrderCreated,
             When(StockReservedEvent)
                 .TransitionTo(StockReserved)
-                .Send(new Uri($"queue:{QueuesConsts.PaymentStockReservedRequestQueueName}"), context => new StockReservedRequestPayment(context.Saga.CorrelationId)
-                {
-                    OrderItems = context.Message.OrderItems,
-                    TotalPrice = context.Saga.TotalPrice,
-                    CustomerId = context.Saga.CustomerId
-                })
+                .Send(new Uri($"queue:{QueuesConsts.PaymentStockReservedRequestQueueName}"),
+                    context => new StockReservedRequestPayment(context.Saga.CorrelationId)
+                    {
+                        OrderItems = context.Message.OrderItems,
+                        TotalPrice = context.Saga.TotalPrice,
+                        CustomerId = context.Saga.CustomerId
+                    })
                 .Then(context => { Console.WriteLine($"After StockReservedEvent : {context.Saga}"); }),
-            When(StockNotReservedEvent).TransitionTo(StockNotReserved)
-                .Publish(context => new OrderRequestFailedEvent() { OrderId = context.Saga.OrderId, Reason = context.Message.Reason })
+            When(StockNotReservedEvent)
+                .TransitionTo(StockNotReserved)
+                .Publish(
+                    context => new OrderRequestFailedEvent
+                    {
+                        OrderId = context.Saga.OrderId,
+                        Reason = context.Message.Reason
+                    })
                 .Then(context => { Console.WriteLine($"After StockReservedEvent : {context.Saga}"); })
         );
 
         During(StockReserved,
             When(PaymentCompletedEvent)
                 .TransitionTo(PaymentCompleted)
-                .Publish(context => new OrderRequestCompletedEvent { OrderId = context.Saga.OrderId })
+                .Publish(
+                    context => new OrderRequestCompletedEvent
+                    {
+                        OrderId = context.Saga.OrderId
+                    })
                 .Then(context => { Console.WriteLine($"After PaymentCompletedEvent : {context.Saga}"); })
                 .Finalize(),
             When(PaymentFailedEvent)
                 .Publish(context => new OrderRequestFailedEvent() { OrderId = context.Saga.OrderId, Reason = context.Message.Reason })
-                .Send(new Uri($"queue:{QueuesConsts.StockRollBackMessageQueueName}"), context => new StockRollbackMessage() { OrderItems = context.Message.OrderItems })
+                .Send(new Uri($"queue:{QueuesConsts.StockRollBackMessageQueueName}"),
+                    context => new StockRollbackMessage
+                    {
+                        OrderItems = context.Message.OrderItems
+                    })
                 .TransitionTo(PaymentFailed)
                 .Then(context => { Console.WriteLine($"After PaymentFailedEvent : {context.Saga}"); })
         );
