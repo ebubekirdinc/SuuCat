@@ -1,3 +1,4 @@
+using Notification.Infrastructure;
 using Notification.Infrastructure.Persistence;
 using WebUI.Middlewares;
 

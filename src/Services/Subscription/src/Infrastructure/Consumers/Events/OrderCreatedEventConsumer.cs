@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Shared.Events;
-using Shared.Interfaces;
+using Shared.Events.Interfaces;
 using Subscription.Application.Common.Interfaces.MassTransit;
 using Subscription.Infrastructure.Persistence;
 
-namespace Subscription.Infrastructure.Consumers;
+namespace Subscription.Infrastructure.Consumers.Events;
 
 public class OrderCreatedEventConsumer : IConsumer<IOrderCreatedEvent>
 {

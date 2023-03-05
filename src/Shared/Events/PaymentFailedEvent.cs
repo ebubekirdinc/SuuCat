@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared.Interfaces;
+using Shared.Events.Interfaces;
 
 namespace Shared.Events
 {
@@ -12,7 +12,7 @@ namespace Shared.Events
         }
 
         public string Reason { get; set; }
-        public List<OrderCreatedRequestEventItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
 
         public Guid CorrelationId { get; }
     }

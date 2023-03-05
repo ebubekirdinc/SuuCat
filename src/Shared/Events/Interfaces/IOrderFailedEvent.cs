@@ -1,6 +1,6 @@
-﻿namespace Shared.Interfaces
+﻿namespace Shared.Events.Interfaces
 {
-    public interface IOrderRequestFailedEvent
+    public interface IOrderFailedEvent
     {
         public int OrderId { get; set; }
         public string Reason { get; set; }

@@ -1,7 +1,7 @@
-﻿using MassTransit;
-using System;
+﻿using System;
+using MassTransit;
 
-namespace Shared.Interfaces
+namespace Shared.Events.Interfaces
 {
     public interface IStockNotReservedEvent : CorrelatedBy<Guid>
     {

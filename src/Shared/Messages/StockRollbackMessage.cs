@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Shared.Events;
+using Shared.Messages.Interfaces;
 
 namespace Shared.Messages
 {
     public class StockRollbackMessage : IStockRollBackMessage
     {
-        public List<OrderCreatedRequestEventItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

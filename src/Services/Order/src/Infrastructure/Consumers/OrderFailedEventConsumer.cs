@@ -2,23 +2,23 @@
 using Microsoft.Extensions.Logging;
 using Order.Domain.Enums;
 using Order.Infrastructure.Persistence;
-using Shared.Interfaces;
+using Shared.Events.Interfaces;
 
 namespace Order.Infrastructure.Consumers;
 
-public class OrderRequestFailedEventConsumer : IConsumer<IOrderRequestFailedEvent>
+public class OrderFailedEventConsumer : IConsumer<IOrderFailedEvent>
 {
     private readonly ApplicationDbContext _context;
 
-    private readonly ILogger<OrderRequestFailedEventConsumer> _logger;
+    private readonly ILogger<OrderFailedEventConsumer> _logger;
 
-    public OrderRequestFailedEventConsumer(ApplicationDbContext context, ILogger<OrderRequestFailedEventConsumer> logger)
+    public OrderFailedEventConsumer(ApplicationDbContext context, ILogger<OrderFailedEventConsumer> logger)
     {
         _context = context;
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<IOrderRequestFailedEvent> context)
+    public async Task Consume(ConsumeContext<IOrderFailedEvent> context)
     {
         var order = await _context.Orders.FindAsync(context.Message.OrderId);
 

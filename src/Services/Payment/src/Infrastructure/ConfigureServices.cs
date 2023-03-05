@@ -46,7 +46,7 @@ public static class ConfigureServices
 
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<StockReservedRequestPaymentConsumer>();
+            x.AddConsumer<CompletePaymentMessageConsumer>();
 
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -56,9 +56,9 @@ public static class ConfigureServices
                     host.Password("password");
                 });
 
-                cfg.ReceiveEndpoint(QueuesConsts.PaymentStockReservedRequestQueueName, e =>
+                cfg.ReceiveEndpoint(QueuesConsts.CompletePaymentMessageQueueName, e =>
                 {
-                    e.ConfigureConsumer<StockReservedRequestPaymentConsumer>(context);
+                    e.ConfigureConsumer<CompletePaymentMessageConsumer>(context);
                 });
             });
         });

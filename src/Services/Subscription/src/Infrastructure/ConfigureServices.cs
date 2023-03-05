@@ -11,6 +11,8 @@ using Subscription.Infrastructure.Services;
 using MassTransit;
 using Shared.Constants;
 using Subscription.Infrastructure.Consumers;
+using Subscription.Infrastructure.Consumers.Events;
+using Subscription.Infrastructure.Consumers.Messages;
 
 namespace Subscription.Infrastructure;
 

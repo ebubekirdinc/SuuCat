@@ -31,7 +31,7 @@ IHost host = Host.CreateDefaultBuilder(args)
                     host.Password("password");
                 });
 
-                configure.ReceiveEndpoint(QueuesConsts.OrderCreatedRequest, e => { e.ConfigureSaga<OrderStateInstance>(provider); });
+                configure.ReceiveEndpoint(QueuesConsts.CreateOrderMessageQueueName, e => { e.ConfigureSaga<OrderStateInstance>(provider); });
             }));
         });
 

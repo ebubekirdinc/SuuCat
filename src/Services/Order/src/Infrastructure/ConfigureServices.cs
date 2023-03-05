@@ -47,8 +47,8 @@ public static class ConfigureServices
 
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<OrderRequestCompletedEventConsumer>();
-            x.AddConsumer<OrderRequestFailedEventConsumer>();
+            x.AddConsumer<OrderCompletedEventConsumer>();
+            x.AddConsumer<OrderFailedEventConsumer>();
 
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -60,12 +60,12 @@ public static class ConfigureServices
 
                 cfg.ReceiveEndpoint(QueuesConsts.OrderRequestCompletedEventtQueueName, x =>
                 {
-                    x.ConfigureConsumer<OrderRequestCompletedEventConsumer>(context);
+                    x.ConfigureConsumer<OrderCompletedEventConsumer>(context);
                 });
                 
                 cfg.ReceiveEndpoint(QueuesConsts.OrderRequestFailedEventtQueueName, x =>
                 {
-                    x.ConfigureConsumer<OrderRequestFailedEventConsumer>(context);
+                    x.ConfigureConsumer<OrderFailedEventConsumer>(context);
                 });
             });
         });

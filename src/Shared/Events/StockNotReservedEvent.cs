@@ -1,5 +1,5 @@
 ﻿using System;
-using Shared.Interfaces;
+using Shared.Events.Interfaces;
 
 namespace Shared.Events
 {

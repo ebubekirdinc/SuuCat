@@ -2,19 +2,21 @@
 using SagaOrchestrationStateMachine.StateInstances;
 using Shared.Constants;
 using Shared.Events;
-using Shared.Interfaces;
+using Shared.Events.Interfaces; 
 using Shared.Messages;
+using Shared.Messages.Interfaces;
 
 namespace SagaOrchestrationStateMachine.StateMachines;
 
 public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
 {
-    public Event<IOrderCreatedRequestEvent> OrderCreatedRequestEvent { get; set; }
+    public Event<ICreateOrderMessage> CreateOrderMessage { get; set; }
     public Event<IStockReservedEvent> StockReservedEvent { get; set; }
     public Event<IStockNotReservedEvent> StockNotReservedEvent { get; set; }
     public Event<IPaymentCompletedEvent> PaymentCompletedEvent { get; set; }
     public Event<IPaymentFailedEvent> PaymentFailedEvent { get; set; }
 
+    // States
     public State OrderCreated { get; private set; }
     public State StockReserved { get; private set; }
     public State StockNotReserved { get; private set; }
@@ -25,7 +27,7 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
     {
         InstanceState(x => x.CurrentState);
 
-        Event(() => OrderCreatedRequestEvent, y => y.CorrelateBy<int>(x => x.OrderId, z => z.Message.OrderId)
+        Event(() => CreateOrderMessage, y => y.CorrelateBy<int>(x => x.OrderId, z => z.Message.OrderId)
             .SelectId(context => Guid.NewGuid()));
 
         Event(() => StockReservedEvent, x => x.CorrelateById(y => y.Message.CorrelationId));
@@ -33,7 +35,7 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
         Event(() => PaymentCompletedEvent, x => x.CorrelateById(y => y.Message.CorrelationId));
 
         Initially(
-            When(OrderCreatedRequestEvent)
+            When(CreateOrderMessage)
                 .Then(context =>
                 {
                     context.Saga.CustomerId = context.Message.CustomerId;
@@ -42,20 +44,20 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
                     context.Saga.PaymentAccountId = context.Message.PaymentAccountId;
                     context.Saga.TotalPrice = context.Message.TotalPrice;
                 })
-                .Then(context => { Console.WriteLine($"Before OrderCreatedRequestEvent : {context.Saga}"); })
+                .Then(context => { Console.WriteLine($"Before OrderCreatedEvent : {context.Saga}"); })
                 .Publish(
                     context => new OrderCreatedEvent(context.Saga.CorrelationId)
                     {
                         OrderItems = context.Message.OrderItems
                     })
                 .TransitionTo(OrderCreated)
-                .Then(context => { Console.WriteLine($"After OrderCreatedRequestEvent : {context.Saga}"); }));
+                .Then(context => { Console.WriteLine($"After OrderCreatedEvent : {context.Saga}"); }));
 
         During(OrderCreated,
             When(StockReservedEvent)
                 .TransitionTo(StockReserved)
-                .Send(new Uri($"queue:{QueuesConsts.PaymentStockReservedRequestQueueName}"),
-                    context => new StockReservedRequestPayment(context.Saga.CorrelationId)
+                .Send(new Uri($"queue:{QueuesConsts.CompletePaymentMessageQueueName}"),
+                    context => new CompletePaymentMessage(context.Saga.CorrelationId)
                     {
                         OrderItems = context.Message.OrderItems,
                         TotalPrice = context.Saga.TotalPrice,
@@ -65,7 +67,7 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
             When(StockNotReservedEvent)
                 .TransitionTo(StockNotReserved)
                 .Publish(
-                    context => new OrderRequestFailedEvent
+                    context => new OrderFailedEvent
                     {
                         OrderId = context.Saga.OrderId,
                         Reason = context.Message.Reason
@@ -77,14 +79,14 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
             When(PaymentCompletedEvent)
                 .TransitionTo(PaymentCompleted)
                 .Publish(
-                    context => new OrderRequestCompletedEvent
+                    context => new OrderCompletedEvent
                     {
                         OrderId = context.Saga.OrderId
                     })
                 .Then(context => { Console.WriteLine($"After PaymentCompletedEvent : {context.Saga}"); })
                 .Finalize(),
             When(PaymentFailedEvent)
-                .Publish(context => new OrderRequestFailedEvent() { OrderId = context.Saga.OrderId, Reason = context.Message.Reason })
+                .Publish(context => new OrderFailedEvent() { OrderId = context.Saga.OrderId, Reason = context.Message.Reason })
                 .Send(new Uri($"queue:{QueuesConsts.StockRollBackMessageQueueName}"),
                     context => new StockRollbackMessage
                     {

@@ -2,23 +2,23 @@
 using Microsoft.Extensions.Logging;
 using Order.Domain.Enums;
 using Order.Infrastructure.Persistence;
-using Shared.Interfaces;
+using Shared.Events.Interfaces;
 
 namespace Order.Infrastructure.Consumers;
 
-public class OrderRequestCompletedEventConsumer : IConsumer<IOrderRequestCompletedEvent>
+public class OrderCompletedEventConsumer : IConsumer<IOrderCompletedEvent>
 {
     private readonly ApplicationDbContext _context;
 
-    private readonly ILogger<OrderRequestCompletedEventConsumer> _logger;
+    private readonly ILogger<OrderCompletedEventConsumer> _logger;
 
-    public OrderRequestCompletedEventConsumer(ApplicationDbContext context, ILogger<OrderRequestCompletedEventConsumer> logger)
+    public OrderCompletedEventConsumer(ApplicationDbContext context, ILogger<OrderCompletedEventConsumer> logger)
     {
         _context = context;
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<IOrderRequestCompletedEvent> context)
+    public async Task Consume(ConsumeContext<IOrderCompletedEvent> context)
     {
         var order = await _context.Orders.FindAsync(context.Message.OrderId);
 

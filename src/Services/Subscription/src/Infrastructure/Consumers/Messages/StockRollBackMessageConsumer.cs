@@ -1,10 +1,10 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Shared.Messages;
+using Shared.Messages.Interfaces;
 using Subscription.Infrastructure.Persistence;
 
-namespace Subscription.Infrastructure.Consumers;
+namespace Subscription.Infrastructure.Consumers.Messages;
 
 public class StockRollBackMessageConsumer : IConsumer<IStockRollBackMessage>
 {

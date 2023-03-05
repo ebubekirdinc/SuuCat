@@ -16,6 +16,7 @@ namespace Identity.API
             new ApiResource("resource_assessment",new [] { JwtClaimTypes.Role }) { Scopes = { "assessmentfull_scope" } },
             new ApiResource("resource_account",new [] { JwtClaimTypes.Role }) { Scopes = { "accountfull_scope" } },
             new ApiResource("resource_order",new [] { JwtClaimTypes.Role }) { Scopes = { "orderfull_scope" } },
+            new ApiResource("resource_notification",new [] { JwtClaimTypes.Role }) { Scopes = { "notification_scope" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -36,6 +37,7 @@ namespace Identity.API
                 new ApiScope("assessmentfull_scope", "Full permission for assessment"),
                 new ApiScope("accountfull_scope", "Full permission for account"),
                 new ApiScope("orderfull_scope", "Full permission for order"),
+                new ApiScope("notification_scope", "Full permission for notification"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
             };
 
@@ -49,7 +51,7 @@ namespace Identity.API
                     ClientId = "WebMvcClient",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "assessmentfull_scope", "accountfull_scope", "orderfull_scope", IdentityServerConstants.LocalApi.ScopeName },
+                    AllowedScopes = { "assessmentfull_scope", "accountfull_scope", "orderfull_scope", "notification_scope", IdentityServerConstants.LocalApi.ScopeName },
                 },
                 new Client
                 {
@@ -68,6 +70,7 @@ namespace Identity.API
                         "assessmentfull_scope",
                         "accountfull_scope",
                         "orderfull_scope",
+                        "notification_scope",
                         IdentityServerConstants.StandardScopes.OfflineAccess, // refresh token
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
