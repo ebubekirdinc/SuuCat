@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using EventBus.Constants;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,6 @@ using Order.Infrastructure.Persistence.Interceptors;
 using Order.Infrastructure.Services;
 using MassTransit;
 using Order.Infrastructure.Consumers;
-using Shared.Constants;
 
 namespace Order.Infrastructure;
 

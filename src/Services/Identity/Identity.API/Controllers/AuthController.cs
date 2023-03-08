@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using EventBus.Events;
 using Identity.API.Models;
 using IdentityServer4;
 using MassTransit;
@@ -13,7 +14,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Shared.Dto;
-using Shared.Events;
 
 namespace Identity.API.Controllers
 {

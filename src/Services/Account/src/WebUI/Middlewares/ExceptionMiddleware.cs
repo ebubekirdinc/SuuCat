@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Mime;
 using Account.Application.Common.Exceptions;
-using FluentValidation;
 using Newtonsoft.Json;
 using Shared.Dto;
 

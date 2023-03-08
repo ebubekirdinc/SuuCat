@@ -1,12 +1,8 @@
 ﻿using System.Reflection;
-using Notification.Application.Common.Interfaces; 
-using Notification.Infrastructure.Identity;
+using Notification.Application.Common.Interfaces;
 using Notification.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace Notification.Infrastructure.Persistence;
 

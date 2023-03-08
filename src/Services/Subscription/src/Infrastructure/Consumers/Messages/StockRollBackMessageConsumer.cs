@@ -1,7 +1,7 @@
-﻿using MassTransit;
+﻿using EventBus.Messages.Interfaces;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Shared.Messages.Interfaces;
 using Subscription.Infrastructure.Persistence;
 
 namespace Subscription.Infrastructure.Consumers.Messages;

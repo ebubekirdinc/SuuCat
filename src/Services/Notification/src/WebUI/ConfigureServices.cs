@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Notification.Application.Common.Interfaces;
 using Notification.Infrastructure.Persistence;
-using Notification.WebUI.Filters;
 using Notification.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;

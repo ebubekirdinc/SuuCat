@@ -1,6 +1,5 @@
 ﻿using System.Net;
-using System.Net.Mime; 
-using FluentValidation;
+using System.Net.Mime;
 using Newtonsoft.Json;
 using Notification.Application.Common.Exceptions;
 using Shared.Dto;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EventBus.Events;
 using MassTransit;
-using Shared.Events;
 
-namespace Shared.Messages.Interfaces
+namespace EventBus.Messages.Interfaces
 {
     public interface ICompletePaymentMessage : CorrelatedBy<Guid>
     {

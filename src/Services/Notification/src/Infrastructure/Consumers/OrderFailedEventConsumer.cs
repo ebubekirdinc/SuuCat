@@ -1,6 +1,6 @@
-﻿using MassTransit;
+﻿using EventBus.Events.Interfaces;
+using MassTransit;
 using Microsoft.Extensions.Logging;
-using Shared.Events.Interfaces;
 
 namespace Notification.Infrastructure.Consumers;
 

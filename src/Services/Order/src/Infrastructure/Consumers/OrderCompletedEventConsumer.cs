@@ -1,8 +1,8 @@
-﻿using MassTransit;
+﻿using EventBus.Events.Interfaces;
+using MassTransit;
 using Microsoft.Extensions.Logging;
 using Order.Domain.Enums;
 using Order.Infrastructure.Persistence;
-using Shared.Events.Interfaces;
 
 namespace Order.Infrastructure.Consumers;
 

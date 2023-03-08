@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models; 
 using Order.Application.Common.Interfaces;
 using Order.Infrastructure.Persistence;
-using WebUI.Filters;
 using WebUI.Services;
 
 namespace WebUI;

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared.Events.Interfaces;
+using EventBus.Events.Interfaces;
 
-namespace Shared.Events
+namespace EventBus.Events
 {
-    public class PaymentFailedEvent : IPaymentFailedEvent
+    public class StockReservedEvent : IStockReservedEvent
     {
-        public PaymentFailedEvent(Guid correlationId)
+        public StockReservedEvent(Guid correlationId)
         {
             CorrelationId = correlationId;
         }
 
-        public string Reason { get; set; }
         public List<OrderItem> OrderItems { get; set; }
 
         public Guid CorrelationId { get; }

@@ -1,12 +1,8 @@
 ﻿using System.Reflection;
-using Discount.Application.Common.Interfaces; 
-using Discount.Infrastructure.Identity;
+using Discount.Application.Common.Interfaces;
 using Discount.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace Discount.Infrastructure.Persistence;
 

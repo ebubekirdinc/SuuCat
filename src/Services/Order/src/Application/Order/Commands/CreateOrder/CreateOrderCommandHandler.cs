@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
+using EventBus.Constants;
+using EventBus.Events;
+using EventBus.Messages;
+using EventBus.Messages.Interfaces;
 using MediatR;
-using Order.Application.Common.Exceptions;
 using Order.Application.Common.Interfaces;
 using Order.Application.Common.Interfaces.MassTransit;
-using Order.Domain.Entities;
 using Order.Domain.Enums;
-using Shared.Constants;
-using Shared.Dto;
-using Shared.Events;
-using Shared.Events.Interfaces;
-using Shared.Messages;
-using Shared.Messages.Interfaces;
-using OrderItem = Shared.Events.OrderItem;
+using Shared.Dto; 
 
 namespace Order.Application.Order.Commands.CreateOrder;
 

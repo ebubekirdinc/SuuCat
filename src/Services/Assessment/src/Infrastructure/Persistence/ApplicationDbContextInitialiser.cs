@@ -1,7 +1,4 @@
-﻿using Assessment.Domain.Entities;
-using Assessment.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Assessment.Infrastructure.Persistence;

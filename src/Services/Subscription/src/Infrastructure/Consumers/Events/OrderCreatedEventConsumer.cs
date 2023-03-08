@@ -1,8 +1,8 @@
-﻿using MassTransit;
+﻿using EventBus.Events;
+using EventBus.Events.Interfaces;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Shared.Events;
-using Shared.Events.Interfaces;
 using Subscription.Application.Common.Interfaces.MassTransit;
 using Subscription.Infrastructure.Persistence;
 

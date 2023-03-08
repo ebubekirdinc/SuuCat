@@ -1,4 +1,4 @@
-namespace Shared.Events
+namespace EventBus.Events
 {
     public class OrderItem
     {

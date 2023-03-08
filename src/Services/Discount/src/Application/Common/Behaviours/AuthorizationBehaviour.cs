@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Discount.Application.Common.Exceptions;
-using Discount.Application.Common.Interfaces;
-using Discount.Application.Common.Security;
+﻿using Discount.Application.Common.Interfaces;
 using MediatR;
 
 namespace Discount.Application.Common.Behaviours;

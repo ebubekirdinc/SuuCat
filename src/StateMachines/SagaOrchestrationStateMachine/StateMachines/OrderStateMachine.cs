@@ -1,10 +1,10 @@
-﻿using MassTransit;
+﻿using EventBus.Constants;
+using EventBus.Events;
+using EventBus.Events.Interfaces;
+using EventBus.Messages;
+using EventBus.Messages.Interfaces;
+using MassTransit;
 using SagaOrchestrationStateMachine.StateInstances;
-using Shared.Constants;
-using Shared.Events;
-using Shared.Events.Interfaces; 
-using Shared.Messages;
-using Shared.Messages.Interfaces;
 
 namespace SagaOrchestrationStateMachine.StateMachines;
 

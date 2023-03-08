@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Discount.Application.Common.Interfaces;
 using Discount.Infrastructure.Persistence;
-using Discount.WebUI.Filters;
 using Discount.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;

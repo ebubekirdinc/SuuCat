@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Notification.Application.Common.Exceptions;
-using Notification.Application.Common.Interfaces;
-using Notification.Application.Common.Security;
+﻿using Notification.Application.Common.Interfaces;
 using MediatR;
 
 namespace Notification.Application.Common.Behaviours;

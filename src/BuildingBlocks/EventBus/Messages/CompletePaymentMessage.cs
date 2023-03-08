@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared.Events;
-using Shared.Messages.Interfaces;
+using EventBus.Events;
+using EventBus.Messages.Interfaces;
 
-namespace Shared.Messages
+namespace EventBus.Messages
 {
     public class CompletePaymentMessage : ICompletePaymentMessage
     {

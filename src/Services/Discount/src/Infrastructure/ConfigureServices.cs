@@ -1,10 +1,8 @@
-﻿using Discount.Application.Common.Interfaces; 
-using Discount.Infrastructure.Identity;
+﻿using Discount.Application.Common.Interfaces;
 using Discount.Infrastructure.Persistence;
 using Discount.Infrastructure.Persistence.Interceptors;
 using Discount.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

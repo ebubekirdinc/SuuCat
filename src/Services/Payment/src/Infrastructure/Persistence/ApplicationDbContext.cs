@@ -1,12 +1,9 @@
 ﻿using System.Reflection;
-using Payment.Application.Common.Interfaces; 
-using Payment.Infrastructure.Identity;
+using Payment.Application.Common.Interfaces;
 using Payment.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Payment.Infrastructure.Common;
 
 namespace Payment.Infrastructure.Persistence;
 

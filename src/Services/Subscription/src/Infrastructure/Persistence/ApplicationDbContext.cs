@@ -1,12 +1,8 @@
 ﻿using System.Reflection;
-using Subscription.Application.Common.Interfaces; 
-using Subscription.Infrastructure.Identity;
+using Subscription.Application.Common.Interfaces;
 using Subscription.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Subscription.Domain.Entities;
 
 namespace Subscription.Infrastructure.Persistence;

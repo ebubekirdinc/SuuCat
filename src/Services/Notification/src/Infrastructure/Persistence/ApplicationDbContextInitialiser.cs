@@ -1,7 +1,4 @@
-﻿ 
-using Notification.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Notification.Infrastructure.Persistence;

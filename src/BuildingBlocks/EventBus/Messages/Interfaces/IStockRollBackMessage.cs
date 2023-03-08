@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Shared.Events;
+using EventBus.Events;
 
-namespace Shared.Messages.Interfaces
+namespace EventBus.Messages.Interfaces
 {
     public interface IStockRollBackMessage
     {

@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Payment.Application.Common.Interfaces;
 using Payment.Infrastructure.Persistence;
-using Payment.WebUI.Filters;
 using Payment.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using EventBus.Constants;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,8 +10,6 @@ using Subscription.Infrastructure.Persistence;
 using Subscription.Infrastructure.Persistence.Interceptors;
 using Subscription.Infrastructure.Services;
 using MassTransit;
-using Shared.Constants;
-using Subscription.Infrastructure.Consumers;
 using Subscription.Infrastructure.Consumers.Events;
 using Subscription.Infrastructure.Consumers.Messages;
 

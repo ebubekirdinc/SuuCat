@@ -1,7 +1,4 @@
-﻿ 
-using Payment.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Payment.Infrastructure.Persistence;

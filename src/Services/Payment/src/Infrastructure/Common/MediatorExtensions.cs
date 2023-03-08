@@ -1,7 +1,8 @@
-﻿using Payment.Domain.Common;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Payment.Domain.Common;
 
-namespace MediatR;
+namespace Payment.Infrastructure.Common;
 
 public static class MediatorExtensions
 {

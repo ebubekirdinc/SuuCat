@@ -1,15 +1,4 @@
-﻿using Assessment.Application.Common.Interfaces;
-using Assessment.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
-
-namespace Assessment.Application.IntegrationTests;
-
-using static Testing;
+﻿namespace Assessment.Application.IntegrationTests;
 
 internal class CustomWebApplicationFactory //: WebApplicationFactory<Program>
 {

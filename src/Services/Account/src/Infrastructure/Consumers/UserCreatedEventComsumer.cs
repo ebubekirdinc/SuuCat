@@ -1,8 +1,8 @@
 ﻿using Account.Domain.Entities;
 using Account.Infrastructure.Persistence;
+using EventBus.Events;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Shared.Events;
 
 namespace Account.Infrastructure.Consumers;
 

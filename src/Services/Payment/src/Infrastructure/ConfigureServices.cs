@@ -1,17 +1,16 @@
-﻿using Payment.Application.Common.Interfaces; 
-using Payment.Infrastructure.Identity;
+﻿using EventBus.Constants;
+using MassTransit;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Payment.Application.Common.Interfaces;
+using Payment.Infrastructure.Consumers;
 using Payment.Infrastructure.Persistence;
 using Payment.Infrastructure.Persistence.Interceptors;
 using Payment.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using MassTransit;
-using Payment.Infrastructure.Consumers;
-using Shared.Constants;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Payment.Infrastructure;
 
 public static class ConfigureServices
 {

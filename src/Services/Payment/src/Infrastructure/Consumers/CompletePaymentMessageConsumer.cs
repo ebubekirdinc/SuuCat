@@ -1,7 +1,7 @@
-﻿using MassTransit;
+﻿using EventBus.Events;
+using EventBus.Messages.Interfaces;
+using MassTransit;
 using Microsoft.Extensions.Logging;
-using Shared.Events;
-using Shared.Messages.Interfaces;
 
 namespace Payment.Infrastructure.Consumers;
 

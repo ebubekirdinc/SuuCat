@@ -1,12 +1,8 @@
 ﻿using System.Reflection;
-using Order.Application.Common.Interfaces; 
-using Order.Infrastructure.Identity;
+using Order.Application.Common.Interfaces;
 using Order.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Order.Infrastructure.Common;
 
 namespace Order.Infrastructure.Persistence;

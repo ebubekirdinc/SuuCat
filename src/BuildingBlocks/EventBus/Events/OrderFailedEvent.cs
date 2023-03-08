@@ -1,6 +1,6 @@
-﻿using Shared.Events.Interfaces;
+﻿using EventBus.Events.Interfaces;
 
-namespace Shared.Events
+namespace EventBus.Events
 {
     public class OrderFailedEvent : IOrderFailedEvent
     {

@@ -1,3 +1,4 @@
+using Payment.Infrastructure;
 using Payment.Infrastructure.Persistence;
 using WebUI.Middlewares;
 

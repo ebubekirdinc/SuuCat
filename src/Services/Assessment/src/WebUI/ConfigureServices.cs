@@ -4,7 +4,6 @@ using Assessment.Infrastructure.Persistence;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
-using WebUI.Filters;
 using WebUI.Services;
 
 namespace WebUI;

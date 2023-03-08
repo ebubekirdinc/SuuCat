@@ -1,9 +1,8 @@
 ﻿using System.Net;
-using System.Net.Mime; 
-using FluentValidation;
+using System.Net.Mime;
 using Newtonsoft.Json;
-using Subscription.Application.Common.Exceptions;
 using Shared.Dto;
+using Subscription.Application.Common.Exceptions;
 
 namespace WebUI.Middlewares;
 

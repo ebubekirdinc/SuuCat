@@ -1,11 +1,11 @@
 using System.Reflection;
+using EventBus.Constants;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using SagaOrchestrationStateMachine;
 using SagaOrchestrationStateMachine.DbContext;
 using SagaOrchestrationStateMachine.StateInstances;
 using SagaOrchestrationStateMachine.StateMachines;
-using Shared.Constants;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>

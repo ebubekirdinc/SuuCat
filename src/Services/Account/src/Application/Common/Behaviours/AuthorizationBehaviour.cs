@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Account.Application.Common.Exceptions;
-using Account.Application.Common.Interfaces;
-using Account.Application.Common.Security;
+﻿using Account.Application.Common.Interfaces;
 using MediatR;
 
 namespace Account.Application.Common.Behaviours;

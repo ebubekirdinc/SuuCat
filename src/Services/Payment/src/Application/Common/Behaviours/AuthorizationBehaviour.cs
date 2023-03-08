@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Payment.Application.Common.Exceptions;
-using Payment.Application.Common.Interfaces;
-using Payment.Application.Common.Security;
+﻿using Payment.Application.Common.Interfaces;
 using MediatR;
 
 namespace Payment.Application.Common.Behaviours;

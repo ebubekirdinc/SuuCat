@@ -1,4 +1,4 @@
-﻿namespace Shared.Events.Interfaces
+﻿namespace EventBus.Events.Interfaces
 {
     public interface IOrderFailedEvent
     {

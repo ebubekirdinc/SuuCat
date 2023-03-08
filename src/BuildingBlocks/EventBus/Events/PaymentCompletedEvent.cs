@@ -1,7 +1,7 @@
 ﻿using System;
-using Shared.Events.Interfaces;
+using EventBus.Events.Interfaces;
 
-namespace Shared.Events
+namespace EventBus.Events
 {
     public class PaymentCompletedEvent : IPaymentCompletedEvent
     {

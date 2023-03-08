@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using EventBus.Constants;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +9,6 @@ using Notification.Infrastructure.Consumers;
 using Notification.Infrastructure.Persistence;
 using Notification.Infrastructure.Persistence.Interceptors;
 using Notification.Infrastructure.Services;
-using Shared.Constants;
 
 namespace Notification.Infrastructure;
 

@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Subscription.Application.Common.Interfaces;
 using Subscription.Infrastructure.Persistence;
-using Subscription.WebUI.Filters;
 using Subscription.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
