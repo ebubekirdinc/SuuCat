@@ -1,10 +1,9 @@
 ﻿using System;
 using MassTransit;
 
-namespace EventBus.Events.Interfaces
+namespace EventBus.Events.Interfaces;
+
+public interface IStockNotReservedEvent : CorrelatedBy<Guid>
 {
-    public interface IStockNotReservedEvent : CorrelatedBy<Guid>
-    {
-        string Reason { get; set; }
-    }
+    string Reason { get; set; }
 }

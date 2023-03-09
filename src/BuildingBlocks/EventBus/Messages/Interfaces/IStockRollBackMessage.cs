@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using EventBus.Events;
 
-namespace EventBus.Messages.Interfaces
+namespace EventBus.Messages.Interfaces;
+
+public interface IStockRollBackMessage
 {
-    public interface IStockRollBackMessage
-    {
-        public List<OrderItem> OrderItems { get; set; }
-    }
+    public List<OrderItem> OrderItems { get; set; }
 }

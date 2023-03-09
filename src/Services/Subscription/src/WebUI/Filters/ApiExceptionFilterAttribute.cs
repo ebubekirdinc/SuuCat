@@ -1,9 +1,8 @@
-﻿using Subscription.Application.Common.Exceptions;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Subscription.Application.Common.Exceptions;
 
-namespace Subscription.WebUI.Filters;
+namespace WebUI.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

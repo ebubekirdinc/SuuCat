@@ -1,5 +1,7 @@
+using Notification.Application;
 using Notification.Infrastructure;
 using Notification.Infrastructure.Persistence;
+using WebUI;
 using WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);

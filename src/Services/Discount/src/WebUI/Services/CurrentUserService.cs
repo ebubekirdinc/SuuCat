@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-
 using Discount.Application.Common.Interfaces;
 
-namespace Discount.WebUI.Services;
+namespace WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

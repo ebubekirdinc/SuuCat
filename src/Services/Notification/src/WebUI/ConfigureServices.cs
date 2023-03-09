@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
-using Notification.Application.Common.Interfaces;
-using Notification.Infrastructure.Persistence;
-using Notification.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Notification.Application.Common.Interfaces;
+using Notification.Infrastructure.Persistence;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {

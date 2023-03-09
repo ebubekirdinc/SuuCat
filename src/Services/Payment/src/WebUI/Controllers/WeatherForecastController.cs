@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Payment.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Payment.WebUI.Controllers;
 
 namespace WebUI.Controllers;
 

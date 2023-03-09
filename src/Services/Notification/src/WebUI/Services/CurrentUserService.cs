@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-
 using Notification.Application.Common.Interfaces;
 
-namespace Notification.WebUI.Services;
+namespace WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

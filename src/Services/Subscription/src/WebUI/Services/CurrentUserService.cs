@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-
 using Subscription.Application.Common.Interfaces;
 
-namespace Subscription.WebUI.Services;
+namespace WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

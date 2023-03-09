@@ -4,6 +4,7 @@ using Subscription.Infrastructure.Persistence.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Subscription.Domain.Entities;
+using Subscription.Infrastructure.Common;
 
 namespace Subscription.Infrastructure.Persistence;
 

@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Discount.Application.Common.Interfaces;
 using Discount.Infrastructure.Persistence;
-using Discount.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using MassTransit;
 
-namespace EventBus.Events.Interfaces
+namespace EventBus.Events.Interfaces;
+
+public interface IPaymentFailedEvent : CorrelatedBy<Guid>
 {
-    public interface IPaymentFailedEvent : CorrelatedBy<Guid>
-    {
-        public string Reason { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
-    }
+    public string Reason { get; set; }
+    public List<OrderItem> OrderItems { get; set; }
 }

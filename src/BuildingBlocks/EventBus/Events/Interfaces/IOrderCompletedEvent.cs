@@ -1,7 +1,6 @@
-﻿namespace EventBus.Events.Interfaces
+﻿namespace EventBus.Events.Interfaces;
+
+public interface IOrderCompletedEvent
 {
-    public interface IOrderCompletedEvent
-    {
-        public int OrderId { get; set; }
-    }
+    public int OrderId { get; set; }
 }

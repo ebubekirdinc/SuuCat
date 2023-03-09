@@ -1,7 +1,8 @@
-﻿using Notification.Domain.Common;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Notification.Domain.Common;
 
-namespace MediatR;
+namespace Notification.Infrastructure.Common;
 
 public static class MediatorExtensions
 {

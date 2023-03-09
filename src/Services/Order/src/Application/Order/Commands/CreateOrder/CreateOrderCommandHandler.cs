@@ -6,8 +6,10 @@ using EventBus.Messages.Interfaces;
 using MediatR;
 using Order.Application.Common.Interfaces;
 using Order.Application.Common.Interfaces.MassTransit;
+using Order.Domain.Entities;
 using Order.Domain.Enums;
-using Shared.Dto; 
+using Shared.Dto;
+using OrderItem = EventBus.Events.OrderItem;
 
 namespace Order.Application.Order.Commands.CreateOrder;
 

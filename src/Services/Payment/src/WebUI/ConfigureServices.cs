@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
-using Payment.Application.Common.Interfaces;
-using Payment.Infrastructure.Persistence;
-using Payment.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Payment.Application.Common.Interfaces;
+using Payment.Infrastructure.Persistence;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {

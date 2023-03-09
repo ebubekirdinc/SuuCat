@@ -1,5 +1,4 @@
 ﻿using Discount.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Discount.WebUI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers;

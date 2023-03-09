@@ -1,9 +1,8 @@
-﻿using Notification.Application.Common.Exceptions;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Notification.Application.Common.Exceptions;
 
-namespace Notification.WebUI.Filters;
+namespace WebUI.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

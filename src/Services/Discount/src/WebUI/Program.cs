@@ -1,4 +1,7 @@
+using Discount.Application;
+using Discount.Infrastructure;
 using Discount.Infrastructure.Persistence;
+using WebUI;
 using WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -2,10 +2,9 @@
 using EventBus.Events;
 using EventBus.Messages.Interfaces;
 
-namespace EventBus.Messages
+namespace EventBus.Messages;
+
+public class StockRollbackMessage : IStockRollBackMessage
 {
-    public class StockRollbackMessage : IStockRollBackMessage
-    {
-        public List<OrderItem> OrderItems { get; set; }
-    }
+    public List<OrderItem> OrderItems { get; set; }
 }

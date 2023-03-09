@@ -1,9 +1,8 @@
-﻿using Payment.Application.Common.Exceptions;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Payment.Application.Common.Exceptions;
 
-namespace Payment.WebUI.Filters;
+namespace WebUI.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

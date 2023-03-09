@@ -3,6 +3,7 @@ using Notification.Application.Common.Interfaces;
 using Notification.Infrastructure.Persistence.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Notification.Infrastructure.Common;
 
 namespace Notification.Infrastructure.Persistence;
 

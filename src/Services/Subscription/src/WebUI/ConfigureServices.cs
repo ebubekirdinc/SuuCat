@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
-using Subscription.Application.Common.Interfaces;
-using Subscription.Infrastructure.Persistence;
-using Subscription.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Subscription.Application.Common.Interfaces;
+using Subscription.Infrastructure.Persistence;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {

@@ -1,5 +1,7 @@
+using Payment.Application;
 using Payment.Infrastructure;
 using Payment.Infrastructure.Persistence;
+using WebUI;
 using WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);

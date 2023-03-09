@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-
 using Payment.Application.Common.Interfaces;
 
-namespace Payment.WebUI.Services;
+namespace WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

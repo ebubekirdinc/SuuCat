@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
-using Notification.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Notification.Application.Common.Behaviours;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Notification.Application;
 
 public static class ConfigureServices
 {

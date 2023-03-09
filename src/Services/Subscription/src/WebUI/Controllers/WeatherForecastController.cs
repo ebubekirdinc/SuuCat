@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Subscription.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Subscription.WebUI.Controllers;
 
 namespace WebUI.Controllers;
 

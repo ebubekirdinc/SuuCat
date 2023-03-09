@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
-using Subscription.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Subscription.Application.Common.Behaviours;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Subscription.Application;
 
 public static class ConfigureServices
 {

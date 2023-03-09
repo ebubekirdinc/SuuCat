@@ -1,8 +1,7 @@
 ﻿using MediatR;
-
 using Microsoft.AspNetCore.Mvc;
 
-namespace Notification.WebUI.Controllers;
+namespace WebUI.Controllers;
 
 [ApiController]
 [Route("[area]/[controller]/[action]")]

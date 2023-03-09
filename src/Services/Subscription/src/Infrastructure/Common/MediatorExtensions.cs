@@ -1,7 +1,8 @@
-﻿using Subscription.Domain.Common;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Subscription.Domain.Common;
 
-namespace MediatR;
+namespace Subscription.Infrastructure.Common;
 
 public static class MediatorExtensions
 {

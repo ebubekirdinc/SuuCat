@@ -1,9 +1,8 @@
 ﻿using EventBus.Events.Interfaces;
 
-namespace EventBus.Events
+namespace EventBus.Events;
+
+public class OrderCompletedEvent : IOrderCompletedEvent
 {
-    public class OrderCompletedEvent : IOrderCompletedEvent
-    {
-        public int OrderId { get; set; }
-    }
+    public int OrderId { get; set; }
 }

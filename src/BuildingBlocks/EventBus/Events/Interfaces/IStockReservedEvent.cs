@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using MassTransit;
 
-namespace EventBus.Events.Interfaces
+namespace EventBus.Events.Interfaces;
+
+public interface IStockReservedEvent : CorrelatedBy<Guid>
 {
-    public interface IStockReservedEvent : CorrelatedBy<Guid>
-    {
-        List<OrderItem> OrderItems { get; set; }
-    }
+    List<OrderItem> OrderItems { get; set; }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Notification.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Notification.WebUI.Controllers;
 
 namespace WebUI.Controllers;
 

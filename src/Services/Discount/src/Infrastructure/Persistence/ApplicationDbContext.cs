@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Discount.Application.Common.Interfaces;
+using Discount.Infrastructure.Common;
 using Discount.Infrastructure.Persistence.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

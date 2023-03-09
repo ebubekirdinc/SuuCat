@@ -1,7 +1,8 @@
 ﻿using Discount.Domain.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediatR;
+namespace Discount.Infrastructure.Common;
 
 public static class MediatorExtensions
 {

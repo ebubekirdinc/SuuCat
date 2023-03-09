@@ -1,17 +1,16 @@
 ﻿using System;
 using EventBus.Events.Interfaces;
 
-namespace EventBus.Events
+namespace EventBus.Events;
+
+public class StockNotReservedEvent : IStockNotReservedEvent
 {
-    public class StockNotReservedEvent : IStockNotReservedEvent
+    public StockNotReservedEvent(Guid correlationId)
     {
-        public StockNotReservedEvent(Guid correlationId)
-        {
-            CorrelationId = correlationId;
-        }
-
-        public string Reason { get; set; }
-
-        public Guid CorrelationId { get; }
+        CorrelationId = correlationId;
     }
+
+    public string Reason { get; set; }
+
+    public Guid CorrelationId { get; }
 }

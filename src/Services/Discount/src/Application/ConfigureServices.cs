@@ -2,8 +2,9 @@
 using Discount.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Discount.Application;
 
 public static class ConfigureServices
 {

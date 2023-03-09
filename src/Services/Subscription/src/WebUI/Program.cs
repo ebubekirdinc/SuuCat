@@ -1,5 +1,7 @@
+using Subscription.Application;
 using Subscription.Infrastructure;
 using Subscription.Infrastructure.Persistence;
+using WebUI;
 using WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
