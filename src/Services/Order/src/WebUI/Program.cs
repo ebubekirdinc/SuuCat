@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Logging;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Order.Application;
 using Order.Infrastructure;
 using Order.Infrastructure.Persistence;
@@ -64,9 +66,17 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
+app.UseEndpoints(endpoints =>
+{ 
+    endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+});
+
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");
-;
 
 app.Run();

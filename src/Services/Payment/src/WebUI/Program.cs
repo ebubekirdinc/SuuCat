@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Logging;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Payment.Application;
 using Payment.Infrastructure;
 using Payment.Infrastructure.Persistence;
@@ -63,6 +65,15 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{ 
+    endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+});
 
 app.MapRazorPages();
 

@@ -1,7 +1,9 @@
 using Account.Application;
 using Account.Infrastructure;
 using Account.Infrastructure.Persistence;
+using HealthChecks.UI.Client;
 using Logging;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using WebUI;
 using WebUI.Middlewares;
@@ -63,6 +65,15 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{ 
+    endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+});
 
 app.MapRazorPages();
 

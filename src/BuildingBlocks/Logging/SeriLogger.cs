@@ -20,15 +20,15 @@ public static class SeriLogger
                 .WriteTo.Elasticsearch(
                     new ElasticsearchSinkOptions(new Uri(elasticUri))
                     {
-                        IndexFormat = $"applogs-{context.HostingEnvironment.ApplicationName?.ToLowerInvariant().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLowerInvariant().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
+                        IndexFormat = $"suucat-applogs-{context.HostingEnvironment.ApplicationName?.ToLowerInvariant().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLowerInvariant().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
                         AutoRegisterTemplate = true,
                         NumberOfShards = 2,
                         NumberOfReplicas = 1
-                    }) 
-                .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName) 
-                .Enrich.WithProperty("ContentRootPath", context.HostingEnvironment.ContentRootPath) 
+                    })
+                .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
+                .Enrich.WithProperty("ContentRootPath", context.HostingEnvironment.ContentRootPath)
                 .Enrich.WithEnvironmentName()
-                .Enrich.FromLogContext() 
+                .Enrich.FromLogContext()
                 .ReadFrom.Configuration(context.Configuration);
         };
 }
