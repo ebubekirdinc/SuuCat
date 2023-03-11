@@ -1,8 +1,10 @@
+using Logging;
 using Order.Application;
 using Order.Infrastructure;
 using Order.Infrastructure.Persistence;
 using WebUI;
 using WebUI.Middlewares;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +16,14 @@ builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
         options.Authority = "https://localhost:5001";
-        options.Audience = "resource_order"; 
+        options.Audience = "resource_order";
         // options.TokenValidationParameters = new TokenValidationParameters
         // {
         //     ValidateAudience = false
         // };
     });
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 var app = builder.Build();
 
@@ -62,6 +66,7 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html");
+;
 
 app.Run();

@@ -1,6 +1,8 @@
 using Discount.Application;
 using Discount.Infrastructure;
 using Discount.Infrastructure.Persistence;
+using Logging;
+using Serilog;
 using WebUI;
 using WebUI.Middlewares;
 
@@ -20,6 +22,8 @@ builder.Services.AddAuthentication("Bearer")
         //     ValidateAudience = false
         // };
     });
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 var app = builder.Build();
 

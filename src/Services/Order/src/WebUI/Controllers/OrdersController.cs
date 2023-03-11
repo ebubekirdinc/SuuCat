@@ -12,6 +12,13 @@ namespace WebUI.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 public class OrdersController : ApiControllerBase
 {
+    private readonly ILogger<OrdersController> _logger;
+
+    public OrdersController(ILogger<OrdersController> logger)
+    {
+        _logger = logger;
+    }
+
     /// <summary>
     /// Creates an Order
     /// </summary> 
@@ -21,10 +28,11 @@ public class OrdersController : ApiControllerBase
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<ApiResult<string>>> CreateCategory([FromBody] CreateOrderCommand commandd)
+    public async Task<ActionResult<ApiResult<string>>> CreateOrder([FromBody] CreateOrderCommand commandd)
     {
         var command = new CreateOrderCommand { CustomerId = 1.ToString(), PaymentAccountId = "account_id_12",
             OrderItems = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
+        
         return await Mediator.Send(command);
     }
 }

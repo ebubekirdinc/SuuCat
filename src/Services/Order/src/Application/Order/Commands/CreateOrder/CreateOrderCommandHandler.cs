@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using EventBus.Constants;
-using EventBus.Events;
 using EventBus.Messages;
 using EventBus.Messages.Interfaces;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Order.Application.Common.Interfaces;
 using Order.Application.Common.Interfaces.MassTransit;
-using Order.Domain.Entities;
 using Order.Domain.Enums;
 using Shared.Dto;
 using OrderItem = EventBus.Events.OrderItem;
@@ -18,12 +17,14 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly IMassTransitService _massTransitService;
+    private readonly ILogger<CreateOrderCommandHandler> _logger;
 
-    public CreateOrderCommandHandler(IApplicationDbContext context, IMapper mapper, IMassTransitService massTransitService)
+    public CreateOrderCommandHandler(IApplicationDbContext context, IMapper mapper, IMassTransitService massTransitService, ILogger<CreateOrderCommandHandler> logger)
     {
         _context = context;
         _mapper = mapper;
         _massTransitService = massTransitService;
+        _logger = logger;
     }
 
     public async Task<ApiResult<string>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -58,6 +59,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
         });
  
         await _massTransitService.Send<ICreateOrderMessage>(createOrderMessage, QueuesConsts.CreateOrderMessageQueueName);
+        _logger.LogInformation($"Order (Id={newOrder.Id}) created successfully");
         
 
         return new ApiResult<string>(true, "Order created successfully");

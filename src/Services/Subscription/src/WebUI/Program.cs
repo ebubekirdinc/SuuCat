@@ -1,3 +1,5 @@
+using Logging;
+using Serilog;
 using Subscription.Application;
 using Subscription.Infrastructure;
 using Subscription.Infrastructure.Persistence;
@@ -20,6 +22,8 @@ builder.Services.AddAuthentication("Bearer")
         //     ValidateAudience = false
         // };
     });
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 var app = builder.Build();
 
