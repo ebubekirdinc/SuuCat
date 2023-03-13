@@ -5,6 +5,12 @@ Its purpose is to use microservice patterns in practice.
 
 Development is still in progress. 
 
+[Wiki](https://github.com/ebubekirdinc/SuuCat/wiki)  
+
+[Getting Started](https://github.com/ebubekirdinc/SuuCat/wiki/GettingStarted)  
+
+[Health Check](https://github.com/ebubekirdinc/SuuCat/wiki/HealthCheck)
+
 ## It will have the following concepts. ##
 - API Gateway (Ocelot) with BFF pattern
 - Saga orchestration pattern
@@ -22,7 +28,8 @@ Development is still in progress.
 - Health Checks with Prometheus and Grafana or Watchdog
 
 
-
+## Contributing
+Contributions are welcome! If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.
  
 
 
