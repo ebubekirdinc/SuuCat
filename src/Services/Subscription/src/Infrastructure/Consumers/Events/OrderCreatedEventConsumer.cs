@@ -16,51 +16,60 @@ public class OrderCreatedEventConsumer : IConsumer<IOrderCreatedEvent>
 
     public OrderCreatedEventConsumer(ApplicationDbContext context, ILogger<OrderCreatedEventConsumer> logger, IMassTransitService massTransitService)
     {
+        _massTransitService = massTransitService;
         _context = context;
         _logger = logger;
-        _massTransitService = massTransitService;
     }
 
-    public async Task  Consume(ConsumeContext<IOrderCreatedEvent> context)
+    public async Task Consume(ConsumeContext<IOrderCreatedEvent> context)
     {
-        var stockResult = new List<bool>();
+        var isThereEnoughStock = _context.Stocks.Where(x=>context.Message.OrderItemList.Select(y => y.ProductId).Contains(x.ProductId))
+            .AsEnumerable()
+            .All(x =>
+            context.Message.OrderItemList.Select(y => y.ProductId).Contains(x.ProductId)
+            && x.Count > context.Message.OrderItemList.FirstOrDefault(y => y.ProductId == x.ProductId).Count);
 
-        foreach (var item in context.Message.OrderItems)
+        if (!isThereEnoughStock)
         {
-            stockResult.Add(await _context.Stocks.AnyAsync(x => x.ProductId == item.ProductId && x.Count > item.Count));
-        }
-
-        if (stockResult.All(x => x.Equals(true)))
-        {
-            foreach (var item in context.Message.OrderItems)
+            await _massTransitService.Publish(new StockReservationFailedEvent
             {
-                var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductId == item.ProductId);
+                CorrelationId = context.Message.CorrelationId,
+                ErrorMessage = "Not enough stock"
+            });
 
-                if (stock != null)
-                {
-                    stock.Count -= item.Count;
-                }
-
-                await _context.SaveChangesAsync();
-            }
-
-            _logger.LogInformation($"Stock was reserved for CorrelationId Id :{context.Message.CorrelationId}");
-
-            StockReservedEvent stockReservedEvent = new StockReservedEvent(context.Message.CorrelationId)
-            {
-                OrderItems = context.Message.OrderItems
-            };
-
-            await _massTransitService.Publish(stockReservedEvent);
+            _logger.LogInformation("Not enough stock for CorrelationId Id :{MessageCorrelationId}", context.Message.CorrelationId);
         }
         else
         {
-            await _massTransitService.Publish(new StockNotReservedEvent(context.Message.CorrelationId)
+            foreach (var item in context.Message.OrderItemList)
             {
-                Reason = "Not enough stock"
-            });
-        
-            _logger.LogInformation($"Not enough stock for CorrelationId Id :{context.Message.CorrelationId}");
+                var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductId == item.ProductId);
+
+                if (stock == null)
+                {
+                    await _massTransitService.Publish(new StockReservationFailedEvent
+                    {
+                        CorrelationId = context.Message.CorrelationId,
+                        ErrorMessage = $"Stock not found with product id {item.ProductId} and CorrelationId Id :{context.Message.CorrelationId}"
+                    });
+
+                    _logger.LogInformation("Stock not found with product Id: {ItemProductId} and CorrelationId Id :{MessageCorrelationId}", item.ProductId, context.Message.CorrelationId);
+                    return;
+                }
+
+                stock.Count -= item.Count;
+                await _context.SaveChangesAsync();
+            }
+
+            _logger.LogInformation("Stock was reserved with CorrelationId Id: {MessageCorrelationId}", context.Message.CorrelationId);
+
+            StockReservedEvent stockReservedEvent = new StockReservedEvent
+            {
+                CorrelationId = context.Message.CorrelationId,
+                OrderItemList = context.Message.OrderItemList
+            };
+
+            await _massTransitService.Publish(stockReservedEvent);
         }
     }
 }

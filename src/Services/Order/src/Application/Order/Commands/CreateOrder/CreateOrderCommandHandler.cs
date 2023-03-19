@@ -33,16 +33,16 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
         {
             CustomerId = request.CustomerId,
             Status = OrderStatus.Pending,
-            PaymentAccountId = request.PaymentAccountId
+            PaymentAccountId = request.PaymentAccountId,
+            OrderItemList = request.OrderItemList.Select(item => new Domain.Entities.OrderItem
+            {
+                Price = item.Price,
+                ProductId = item.ProductId,
+                Count = item.Count,
+            }).ToList()
         };
 
-        request.OrderItems.ForEach(item =>
-        {
-            newOrder.OrderItems.Add(new Domain.Entities.OrderItem { Price = item.Price, ProductId = item.ProductId, Count = item.Count, });
-        });
-
         await _context.Orders.AddAsync(newOrder, cancellationToken);
-
         await _context.SaveChangesAsync(cancellationToken); 
         
         var createOrderMessage = new CreateOrderMessage()
@@ -50,17 +50,17 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
             CustomerId = request.CustomerId,
             OrderId = newOrder.Id,
             PaymentAccountId =request.PaymentAccountId,
-            TotalPrice = newOrder.OrderItems.Sum(x => x.Price * x.Count)
+            TotalPrice = newOrder.OrderItemList.Sum(x => x.Price * x.Count),
+            OrderItemList = newOrder.OrderItemList.Select(item => new OrderItem 
+                { 
+                    Count = item.Count, 
+                    ProductId = item.ProductId 
+                }).ToList()
         };
 
-        newOrder.OrderItems.ForEach(item =>
-        {
-            createOrderMessage.OrderItems.Add(new OrderItem { Count = item.Count, ProductId = item.ProductId });
-        });
- 
         await _massTransitService.Send<ICreateOrderMessage>(createOrderMessage, QueuesConsts.CreateOrderMessageQueueName);
-        _logger.LogInformation($"Order (Id={newOrder.Id}) created successfully");
         
+        _logger.LogInformation("Order with Id: {NewOrderId} created successfully", newOrder.Id);
 
         return new ApiResult<string>(true, "Order created successfully");
     }

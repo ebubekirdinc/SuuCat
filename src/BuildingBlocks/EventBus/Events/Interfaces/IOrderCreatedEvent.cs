@@ -6,5 +6,5 @@ namespace EventBus.Events.Interfaces;
 
 public interface IOrderCreatedEvent : CorrelatedBy<Guid>
 {
-    List<OrderItem> OrderItems { get; set; }
+    List<OrderItem> OrderItemList { get; set; }
 }

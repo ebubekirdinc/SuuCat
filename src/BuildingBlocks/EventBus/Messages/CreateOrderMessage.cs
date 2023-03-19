@@ -8,7 +8,7 @@ public class CreateOrderMessage : ICreateOrderMessage
 {
     public CreateOrderMessage()
     {
-        OrderItems = new List<OrderItem>();
+        OrderItemList = new List<OrderItem>();
     }
 
     public int OrderId { get; set; }
@@ -16,5 +16,5 @@ public class CreateOrderMessage : ICreateOrderMessage
     public string PaymentAccountId { get; set; }
     public decimal TotalPrice { get; set; }
 
-    public List<OrderItem> OrderItems { get; set; }
+    public List<OrderItem> OrderItemList { get; set; }
 }

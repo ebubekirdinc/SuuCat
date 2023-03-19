@@ -5,5 +5,5 @@ namespace EventBus.Messages.Interfaces;
 
 public interface IStockRollBackMessage
 {
-    public List<OrderItem> OrderItems { get; set; }
+    public List<OrderItem> OrderItemList { get; set; }
 }

@@ -6,7 +6,7 @@ public class Order : BaseAuditableEntity
 {
     public Order()
     {
-        OrderItems = new List<OrderItem>();
+        OrderItemList = new List<OrderItem>();
     }
     public int Id { get; set; }
     public string CustomerId { get; set; }
@@ -14,5 +14,5 @@ public class Order : BaseAuditableEntity
     public OrderStatus Status { get; set; }
     public string ErrorMessage { get; set; }
     
-    public virtual List<OrderItem> OrderItems { get; set; } 
+    public virtual List<OrderItem> OrderItemList { get; set; } 
 }

@@ -3,9 +3,9 @@
 public class QueuesConsts
 {
     // events
-    public const string StockOrderCreatedEventQueueName = "stock-order-created-queue";
-    public const string OrderRequestCompletedEventtQueueName = "order-request-completed-queue";
-    public const string OrderRequestFailedEventtQueueName = "order-request-failed-queue";
+    public const string OrderCreatedEventQueueName = "order-created-queue";
+    public const string OrderCompletedEventtQueueName = "order-completed-queue";
+    public const string OrderFailedEventtQueueName = "order-failed-queue";
 
     // messages
     public const string CreateOrderMessageQueueName = "create-order-message-queue";

@@ -17,6 +17,7 @@ public class OrderFailedEventConsumer : IConsumer<IOrderFailedEvent>
     {
         // TODO: Send email to customer
 
-        _logger.LogInformation($"Order (Id={context.Message.OrderId}) Order Completed notification sent");
+        _logger.LogInformation("Order Failed notification sent to customer with Id: {CustomerId} for order Id: {MessageOrderId}",
+            context.Message.CustomerId, context.Message.OrderId);
     }
 }

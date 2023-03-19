@@ -9,5 +9,5 @@ public interface ICreateOrderMessage
     public string CustomerId { get; set; }
     public string PaymentAccountId { get; set; }
     public decimal TotalPrice { get; set; }
-    public List<OrderItem> OrderItems { get; set; }
+    public List<OrderItem> OrderItemList { get; set; }
 }

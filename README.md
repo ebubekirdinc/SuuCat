@@ -9,6 +9,8 @@ Development is still in progress.
 
 [Getting Started](https://github.com/ebubekirdinc/SuuCat/wiki/GettingStarted)  
 
+[Eventual Consistency](https://github.com/ebubekirdinc/SuuCat/wiki/EventualConsistency)
+
 [Health Check](https://github.com/ebubekirdinc/SuuCat/wiki/HealthCheck)
 
 ## It will have the following concepts. ##

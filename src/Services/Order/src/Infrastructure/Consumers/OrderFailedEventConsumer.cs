@@ -25,14 +25,15 @@ public class OrderFailedEventConsumer : IConsumer<IOrderFailedEvent>
         if (order != null)
         {
             order.Status = OrderStatus.Fail;
-            order.ErrorMessage = context.Message.Reason;
+            order.ErrorMessage = context.Message.ErrorMessage;
+            
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Order (Id={context.Message.OrderId}) status changed : {order.Status}");
+            _logger.LogInformation("Order with Id: {MessageOrderId} failed, status updated to {Status}", context.Message.OrderId, OrderStatus.Fail);
         }
         else
         {
-            _logger.LogError($"Order (Id={context.Message.OrderId}) not found");
+            _logger.LogError("Order with Id: {MessageOrderId} not found", context.Message.OrderId);
         }
     }
 }

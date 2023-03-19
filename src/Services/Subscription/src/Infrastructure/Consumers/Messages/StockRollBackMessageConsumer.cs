@@ -19,7 +19,7 @@ public class StockRollBackMessageConsumer : IConsumer<IStockRollBackMessage>
 
     public async Task Consume(ConsumeContext<IStockRollBackMessage> context)
     {
-        foreach (var item in context.Message.OrderItems)
+        foreach (var item in context.Message.OrderItemList)
         {
             var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductId == item.ProductId);
 

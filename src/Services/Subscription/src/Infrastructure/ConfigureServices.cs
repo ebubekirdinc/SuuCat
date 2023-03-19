@@ -59,7 +59,7 @@ public static class ConfigureServices
                     host.Password("password");
                 });
 
-                cfg.ReceiveEndpoint(QueuesConsts.StockOrderCreatedEventQueueName, e =>
+                cfg.ReceiveEndpoint(QueuesConsts.OrderCreatedEventQueueName, e =>
                 {
                     e.ConfigureConsumer<OrderCreatedEventConsumer>(context);
                 });

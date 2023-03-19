@@ -1,11 +1,13 @@
 using System.Reflection;
 using EventBus.Constants;
+using Logging;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using SagaOrchestrationStateMachine;
 using SagaOrchestrationStateMachine.DbContext;
 using SagaOrchestrationStateMachine.StateInstances;
 using SagaOrchestrationStateMachine.StateMachines;
+using Serilog;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
@@ -37,6 +39,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         services.AddHostedService<Worker>();
     })
+    .UseSerilog(SeriLogger.Configure)
     .Build();
 
 host.Run();

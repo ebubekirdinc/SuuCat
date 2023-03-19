@@ -31,7 +31,7 @@ public class OrdersController : ApiControllerBase
     public async Task<ActionResult<ApiResult<string>>> CreateOrder([FromBody] CreateOrderCommand commandd)
     {
         var command = new CreateOrderCommand { CustomerId = 1.ToString(), PaymentAccountId = "account_id_12",
-            OrderItems = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
+            OrderItemList = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
         
         return await Mediator.Send(command);
     }

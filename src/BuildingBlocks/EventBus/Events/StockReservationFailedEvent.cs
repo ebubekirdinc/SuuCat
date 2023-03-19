@@ -2,9 +2,8 @@
 
 namespace EventBus.Events;
 
-public class PaymentFailedEvent : IPaymentFailedEvent
+public class StockReservationFailedEvent : IStockReservationFailedEvent
 {
     public Guid CorrelationId { get; set; }
-    public List<OrderItem> OrderItemList { get; set; }
     public string ErrorMessage { get; set; }
 }

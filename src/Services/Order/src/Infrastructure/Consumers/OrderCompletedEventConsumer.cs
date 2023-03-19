@@ -27,11 +27,11 @@ public class OrderCompletedEventConsumer : IConsumer<IOrderCompletedEvent>
             order.Status = OrderStatus.Complete;
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Order (Id={context.Message.OrderId}) status changed : {order.Status}");
+            _logger.LogInformation("Order with Id: {MessageOrderId} completed successfully", context.Message.OrderId);
         }
         else
         {
-            _logger.LogError($"Order (Id={context.Message.OrderId}) not found");
+            _logger.LogError("Order with Id: {MessageOrderId} not found", context.Message.OrderId);
         }
     }
 }

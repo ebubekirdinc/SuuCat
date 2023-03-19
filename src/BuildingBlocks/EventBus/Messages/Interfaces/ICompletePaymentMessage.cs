@@ -7,8 +7,8 @@ namespace EventBus.Messages.Interfaces;
 
 public interface ICompletePaymentMessage : CorrelatedBy<Guid>
 {
-    public decimal TotalPrice { get; set; }
-    public List<OrderItem> OrderItems { get; set; }
-
     public string CustomerId { get; set; }
+    public decimal TotalPrice { get; set; }
+    public List<OrderItem> OrderItemList { get; set; }
+
 }

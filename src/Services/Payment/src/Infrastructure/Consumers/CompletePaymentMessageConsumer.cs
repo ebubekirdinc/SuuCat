@@ -19,19 +19,30 @@ public class CompletePaymentMessageConsumer : IConsumer<ICompletePaymentMessage>
 
     public async Task Consume(ConsumeContext<ICompletePaymentMessage> context)
     {
-        var balance = 3000m;
+        // todo payment from stripe service
+        var paymentSuccess = DateTime.UtcNow.Second % 2 == 0;
 
-        if (balance > context.Message.TotalPrice)
+        if (paymentSuccess)
         {
-            _logger.LogInformation($"{context.Message.TotalPrice} was withdrawn from credit card for user id= {context.Message.CustomerId}");
+            _logger.LogInformation("Payment successfull. {MessageTotalPrice}$ was withdrawn from user with Id= {MessageCustomerId} and correlation Id={MessageCorrelationId}",
+                context.Message.TotalPrice, context.Message.CustomerId, context.Message.CorrelationId);
 
-            await _publishEndpoint.Publish(new PaymentCompletedEvent(context.Message.CorrelationId));
+            await _publishEndpoint.Publish(new PaymentCompletedEvent
+            {
+                CorrelationId = context.Message.CorrelationId
+            });
+
+            return;
         }
-        else
+
+        _logger.LogInformation("Payment failed. {MessageTotalPrice}$ was not withdrawn from user with Id={MessageCustomerId} and correlation Id={MessageCorrelationId}",
+            context.Message.TotalPrice, context.Message.CustomerId, context.Message.CorrelationId);
+
+        await _publishEndpoint.Publish(new PaymentFailedEvent
         {
-            _logger.LogInformation($"{context.Message.TotalPrice} was not withdrawn from credit card for user id={context.Message.CustomerId}");
-            
-            await _publishEndpoint.Publish(new PaymentFailedEvent(context.Message.CorrelationId) { Reason = "not enough balance", OrderItems = context.Message.OrderItems });
-        }
+            CorrelationId = context.Message.CorrelationId,
+            ErrorMessage = "Payment failed", 
+            OrderItemList = context.Message.OrderItemList
+        });
     }
 }
