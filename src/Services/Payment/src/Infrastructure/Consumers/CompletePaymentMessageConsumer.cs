@@ -22,8 +22,8 @@ public class CompletePaymentMessageConsumer : IConsumer<ICompletePaymentMessage>
         // todo payment from stripe service
         var paymentSuccess = DateTime.UtcNow.Second % 2 == 0;
 
-        if (paymentSuccess)
-        {
+        // if (paymentSuccess)
+        // {
             _logger.LogInformation("Payment successfull. {MessageTotalPrice}$ was withdrawn from user with Id= {MessageCustomerId} and correlation Id={MessageCorrelationId}",
                 context.Message.TotalPrice, context.Message.CustomerId, context.Message.CorrelationId);
 
@@ -33,16 +33,16 @@ public class CompletePaymentMessageConsumer : IConsumer<ICompletePaymentMessage>
             });
 
             return;
-        }
-
-        _logger.LogInformation("Payment failed. {MessageTotalPrice}$ was not withdrawn from user with Id={MessageCustomerId} and correlation Id={MessageCorrelationId}",
-            context.Message.TotalPrice, context.Message.CustomerId, context.Message.CorrelationId);
-
-        await _publishEndpoint.Publish(new PaymentFailedEvent
-        {
-            CorrelationId = context.Message.CorrelationId,
-            ErrorMessage = "Payment failed", 
-            OrderItemList = context.Message.OrderItemList
-        });
+        // }
+        //
+        // _logger.LogInformation("Payment failed. {MessageTotalPrice}$ was not withdrawn from user with Id={MessageCustomerId} and correlation Id={MessageCorrelationId}",
+        //     context.Message.TotalPrice, context.Message.CustomerId, context.Message.CorrelationId);
+        //
+        // await _publishEndpoint.Publish(new PaymentFailedEvent
+        // {
+        //     CorrelationId = context.Message.CorrelationId,
+        //     ErrorMessage = "Payment failed", 
+        //     OrderItemList = context.Message.OrderItemList
+        // });
     }
 }

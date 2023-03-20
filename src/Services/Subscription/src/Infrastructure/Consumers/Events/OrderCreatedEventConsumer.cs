@@ -23,11 +23,15 @@ public class OrderCreatedEventConsumer : IConsumer<IOrderCreatedEvent>
 
     public async Task Consume(ConsumeContext<IOrderCreatedEvent> context)
     {
-        var isThereEnoughStock = _context.Stocks.Where(x=>context.Message.OrderItemList.Select(y => y.ProductId).Contains(x.ProductId))
-            .AsEnumerable()
-            .All(x =>
-            context.Message.OrderItemList.Select(y => y.ProductId).Contains(x.ProductId)
-            && x.Count > context.Message.OrderItemList.FirstOrDefault(y => y.ProductId == x.ProductId).Count);
+        var isThereEnoughStock = true;
+        foreach (var item in _context.Stocks.Where(x => context.Message.OrderItemList.Select(y => y.ProductId).Contains(x.ProductId)).AsEnumerable())
+        {
+            if (!context.Message.OrderItemList.Select(y => y.ProductId).Contains(item.ProductId) || item.Count <= context.Message.OrderItemList.FirstOrDefault(y => y.ProductId == item.ProductId).Count)
+            {
+                isThereEnoughStock = false;
+                break;
+            }
+        }
 
         if (!isThereEnoughStock)
         {
