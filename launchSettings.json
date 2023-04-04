@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "webui": "StartDebugging",
+        "sagaorchestrationstatemachine": "StartDebugging",
+        "identity": "StartDebugging",
+        "ocelotgateway": "StartDebugging",
+        "healthcheck": "StartDebugging"
+      }
+    }
+  }
+}

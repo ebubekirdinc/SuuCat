@@ -31,6 +31,7 @@ builder.Services.AddIdentityServer(options =>
 
         // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
         options.EmitStaticAudienceClaim = true;
+        options.IssuerUri = "SuuCat";  
     })
     .AddInMemoryIdentityResources(Config.IdentityResources)
     .AddInMemoryApiResources(Config.ApiResources)

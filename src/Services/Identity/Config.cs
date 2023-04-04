@@ -12,6 +12,7 @@ public static class Config
 {
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
+        new ApiResource("resource_ocelot",new [] { JwtClaimTypes.Role }) { Scopes = { "ocelotfull_scope" } },
         new ApiResource("resource_assessment",new [] { JwtClaimTypes.Role }) { Scopes = { "assessmentfull_scope" } },
         new ApiResource("resource_account",new [] { JwtClaimTypes.Role }) { Scopes = { "accountfull_scope" } },
         new ApiResource("resource_order",new [] { JwtClaimTypes.Role }) { Scopes = { "orderfull_scope" } },
@@ -31,6 +32,7 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
+            new ApiScope("ocelotfull_scope", "Full permission for ocelot gateway"),
             new ApiScope("scope1"),
             new ApiScope("scope2"),
             new ApiScope("assessmentfull_scope", "Full permission for assessment"),
@@ -50,7 +52,7 @@ public static class Config
                 ClientId = "WebMvcClient",
                 ClientSecrets = { new Secret("secret".Sha256()) },
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = { "assessmentfull_scope", "accountfull_scope", "orderfull_scope", "notification_scope", IdentityServerConstants.LocalApi.ScopeName },
+                AllowedScopes = { "ocelotfull_scope", "assessmentfull_scope", "accountfull_scope", "orderfull_scope", "notification_scope", IdentityServerConstants.LocalApi.ScopeName },
             },
             new Client
             {
@@ -66,6 +68,7 @@ public static class Config
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.LocalApi.ScopeName, 
                     "roles",
+                    "ocelotfull_scope",
                     "assessmentfull_scope",
                     "accountfull_scope",
                     "orderfull_scope",

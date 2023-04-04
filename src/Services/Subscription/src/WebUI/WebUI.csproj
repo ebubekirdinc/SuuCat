@@ -5,6 +5,11 @@
         <Nullable>disable</Nullable>
         <IsPackable>true</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>f31353d4-93ae-4ae8-bc19-d5acfb00971a</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..\..\..\..</DockerfileContext>
+        <DockerComposeProjectPath>..\..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +37,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.10" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 
     </ItemGroup>

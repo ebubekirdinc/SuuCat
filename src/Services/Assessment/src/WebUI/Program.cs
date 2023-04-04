@@ -17,8 +17,9 @@ builder.Services.AddWebUIServices();
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = builder.Configuration["IdentityServerURL"];
         options.Audience = "resource_assessment"; 
+        options.RequireHttpsMetadata = false;
         // options.TokenValidationParameters = new TokenValidationParameters
         // {
         //     ValidateAudience = false

@@ -37,9 +37,19 @@ IHost host = Host.CreateDefaultBuilder(args)
             }));
         });
 
+        services.AddDbContext<StateMachineDbContext>(options =>
+            options.UseNpgsql(hostContext.Configuration.GetConnectionString("DefaultConnection")));
+
         services.AddHostedService<Worker>();
     })
     .UseSerilog(SeriLogger.Configure)
     .Build();
+
+using (var scope = host.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var orderDbContext = serviceProvider.GetRequiredService<StateMachineDbContext>();
+    orderDbContext.Database.Migrate();
+}
 
 host.Run();

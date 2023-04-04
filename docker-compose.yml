@@ -1,0 +1,116 @@
+version: '3.4'
+
+services:
+  notificationdb:
+    image: postgres
+    
+  paymentdb:
+    image: postgres
+  
+  subscriptiondb:
+    image: postgres
+  
+  assessmentdb:
+    image: postgres
+
+  accountdb:
+    image: postgres
+
+  statemachinedb:
+    image: postgres
+
+  orderdb:
+    image: postgres
+
+  identitydb:
+    image: postgres
+
+  rabbitmq:
+    image: rabbitmq:3.11.7-management
+
+  notification.api:
+    image: ${DOCKER_REGISTRY-}notificationapi
+    build:
+      context: .
+      dockerfile: src/Services/Notification/src/WebUI/Dockerfile
+
+  payment.api:
+    image: ${DOCKER_REGISTRY-}paymentapi
+    build:
+      context: .
+      dockerfile: src/Services/Payment/src/WebUI/Dockerfile
+
+  subscription.api:
+    image: ${DOCKER_REGISTRY-}subscriptionapi
+    build:
+      context: .
+      dockerfile: src/Services/Subscription/src/WebUI/Dockerfile
+
+  assessment.api:
+    image: ${DOCKER_REGISTRY-}assessmentapi
+    build:
+      context: .
+      dockerfile: src/Services/Assessment/src/WebUI/Dockerfile
+
+  account.api:
+    image: ${DOCKER_REGISTRY-}accountapi
+    build:
+      context: .
+      dockerfile: src/Services/Account/src/WebUI/Dockerfile
+
+  order.api:
+    image: ${DOCKER_REGISTRY-}orderapi
+    build:
+      context: .
+      dockerfile: src/Services/Order/src/WebUI/Dockerfile
+
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Dockerfile
+
+  ocelot.gateway:
+    image: ${DOCKER_REGISTRY-}ocelotgateway
+    build:
+      context: .
+      dockerfile: src/ApiGateways/OcelotGateway/Dockerfile
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+  
+  healthcheck:
+    image: ${DOCKER_REGISTRY-}healthcheck
+    build:
+      context: .
+      dockerfile: src/WebApps/HealthCheck/Dockerfile
+
+  saga.orchestration.statemachine:
+    image: ${DOCKER_REGISTRY-}sagaorchestrationstatemachine
+    build:
+      context: .
+      dockerfile: src/StateMachines/SagaOrchestrationStateMachine/Dockerfile
+
+volumes:
+  notification_postgres_data:
+  payment_postgres_data:
+  subscription_postgres_data:
+  assessment_postgres_data:
+  account_postgres_data: 
+  order_postgres_data:
+  identity_postgres_data:
+  elasticsearch-data:
+  statemachine_postgres_data:
+
+
+
+
+
+
+
+
+
+

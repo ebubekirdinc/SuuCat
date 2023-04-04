@@ -12,7 +12,7 @@ namespace WebUI.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 public class OrdersController : ApiControllerBase
 {
-    private readonly ILogger<OrdersController> _logger;
+    private readonly ILogger<OrdersController> _logger;    
 
     public OrdersController(ILogger<OrdersController> logger)
     {

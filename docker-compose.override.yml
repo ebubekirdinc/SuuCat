@@ -1,0 +1,300 @@
+version: '3.4'
+
+services:
+  notificationdb:
+    container_name: notificationdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=NotificationDb
+    restart: always
+    ports:
+      - "5440:5432"
+    volumes:
+      - notification_postgres_data:/var/lib/postgresql/data/
+
+  paymentdb:
+    container_name: paymentdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=PaymentDb
+    restart: always
+    ports:
+      - "5439:5432"
+    volumes:
+      - payment_postgres_data:/var/lib/postgresql/data/
+
+  subscriptiondb:
+    container_name: subscriptiondb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=SubscriptionDb
+    restart: always
+    ports:
+      - "5437:5432"
+    volumes:
+      - subscription_postgres_data:/var/lib/postgresql/data/
+
+  assessmentdb:
+    container_name: assessmentdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=AssessmentDb
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+      - assessment_postgres_data:/var/lib/postgresql/data/
+
+  accountdb:
+    container_name: accountdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=AccountDb
+    restart: always
+    ports:
+      - "5434:5432"
+    volumes:
+      - account_postgres_data:/var/lib/postgresql/data/
+
+  statemachinedb:
+    container_name: statemachinedb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=StateMachineDb
+    restart: always
+    ports:
+      - "5436:5432"
+    volumes:
+      - statemachine_postgres_data:/var/lib/postgresql/data/
+
+  orderdb:
+    container_name: orderdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=OrderDb
+    restart: always
+    ports:
+      - "5435:5432"
+    volumes:
+      - order_postgres_data:/var/lib/postgresql/data/
+
+  identitydb:
+    container_name: identitydb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=IdentityDb
+    restart: always
+    ports:
+      - "5438:5432"
+    volumes:
+      - identity_postgres_data:/var/lib/postgresql/data/
+
+  rabbitmq:
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      
+  notification.api:
+    container_name: notification.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=notificationdb;Port=5432;Database=NotificationDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - notificationdb
+      - rabbitmq
+    ports:
+      - "5013:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  payment.api:
+    container_name: payment.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=paymentdb;Port=5432;Database=PaymentDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - paymentdb
+      - rabbitmq
+    ports:
+      - "5009:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  subscription.api:
+    container_name: subscription.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=subscriptiondb;Port=5432;Database=SubscriptionDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - subscriptiondb
+      - rabbitmq
+    ports:
+      - "5007:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  assessment.api:
+    container_name: assessment.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=assessmentdb;Port=5432;Database=AssessmentDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - assessmentdb
+      - rabbitmq
+    ports:
+      - "5003:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  account.api:
+    container_name: account.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=accountdb;Port=5432;Database=AccountDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - accountdb
+      - rabbitmq
+    ports:
+      - "5005:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  order.api:
+    container_name: order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=orderdb;Port=5432;Database=OrderDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - orderdb
+      - rabbitmq
+    ports:
+      - "5015:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  identity.api:
+    container_name: identity.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=identitydb;Port=5432;Database=IdentityDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    ports:
+      - "5001:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  healthcheck:
+    container_name: healthcheck 
+    ports:
+      - "5020:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - HealthChecksUI__HealthChecks__0__Name=Identity Health Check
+      - HealthChecksUI__HealthChecks__0__Uri=http://identity.api/hc
+      - HealthChecksUI__HealthChecks__1__Name=Assessment Health Check
+      - HealthChecksUI__HealthChecks__1__Uri=http://assessment.api/hc
+      - HealthChecksUI__HealthChecks__2__Name=Account Health Check
+      - HealthChecksUI__HealthChecks__2__Uri=http://account.api/hc
+      - HealthChecksUI__HealthChecks__3__Name=Subscription Health Check
+      - HealthChecksUI__HealthChecks__3__Uri=http://subscription.api/hc
+      - HealthChecksUI__HealthChecks__4__Name=Payment Health Check
+      - HealthChecksUI__HealthChecks__4__Uri=http://payment.api/hc 
+      - HealthChecksUI__HealthChecks__5__Name=Notification Health Check
+      - HealthChecksUI__HealthChecks__5__Uri=http://notification.api/hc 
+      - HealthChecksUI__HealthChecks__6__Name=Ordering Health Check
+      - HealthChecksUI__HealthChecks__6__Uri=http://order.api/hc 
+  
+  ocelot.gateway:
+    container_name: ocelot.gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityServerURL=http://identity.api
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - identity.api
+      - order.api
+      - notification.api
+      - payment.api
+      - subscription.api
+      - assessment.api
+      - account.api
+    ports:
+      - "5000:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  elasticsearch:
+    container_name: elasticsearch
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+  
+  kibana:
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"  
+
+  saga.orchestration.statemachine:
+    container_name: saga.orchestration.statemachine
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=statemachinedb;Port=5432;Database=StateMachineDb;User Id=admin;Password=admin1234;"
+      - RabbitMQUrl=rabbitmq
+      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+    depends_on:
+      - statemachinedb
+      - rabbitmq
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
