@@ -43,6 +43,7 @@ builder.Services.AddIdentityServer(options =>
     .AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
 builder.Services.AddAuthentication();
+builder.Services.AddScoped<ApplicationDbContextInitialiser>();
             
 builder.Services.AddSwaggerGen(c =>
 {
@@ -78,6 +79,18 @@ builder.Services.AddMassTransit(x =>
 });
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    // app.UseMigrationsEndPoint();
+
+    // Initialise and seed database
+    using (var scope = app.Services.CreateScope())
+    {
+        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        await initialiser.InitialiseAsync();
+        await initialiser.SeedAsync();
+    }
+}
 // app.MapGet("/", () => "Hello World!");
 
 app.UseHealthChecks("/health");

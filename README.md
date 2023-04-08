@@ -11,6 +11,10 @@ Development is still in progress.
 
 [Saga Orchestration with MassTransit and RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/SagaOrchestration)
 
+[API Gateway with Ocelot](https://github.com/ebubekirdinc/SuuCat/wiki/ApiGateway)
+
+[Authorization and Authentications with IdentityServer](https://github.com/ebubekirdinc/SuuCat/wiki/IdentityServer)
+
 [Eventual Consistency with RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/EventualConsistency)
 
 [Distributed Logging with ElasticSearch, Kibana and SeriLog](https://github.com/ebubekirdinc/SuuCat/wiki/DistributedLogging)
@@ -27,7 +31,17 @@ Development is still in progress.
 :star: Star this project on GitHub - it's the first step to become a SuuCat supporter!
 
 Contributions are welcome! If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.
- 
+
+
+## References
+
+[Ocelot](https://ocelot.readthedocs.io/en/latest/introduction/gettingstarted.html)  
+[Identity Server](https://identityserver4.readthedocs.io/en/latest/quickstarts/0_overview.html)  
+[Masstransit Saga](https://masstransit.io/documentation/patterns/saga)  
+[Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture)  
+[Health Monitoring](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/monitor-app-health)
+[RabbitMQ](https://www.rabbitmq.com/documentation.html)  
+
 
 
 
