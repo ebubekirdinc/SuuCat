@@ -19,6 +19,8 @@ Development is still in progress.
 
 [Distributed Logging with ElasticSearch, Kibana and SeriLog](https://github.com/ebubekirdinc/SuuCat/wiki/DistributedLogging)
 
+[Resiliency and Fault Tolerance with Polly](https://github.com/ebubekirdinc/SuuCat/wiki/Resiliency)
+
 [Health Check with WatchDogs](https://github.com/ebubekirdinc/SuuCat/wiki/HealthCheck)
 
 ## Todos ## 

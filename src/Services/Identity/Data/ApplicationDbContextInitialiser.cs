@@ -1,6 +1,7 @@
 ﻿using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Polly;
 
 namespace Identity.Data;
 
@@ -19,36 +20,43 @@ public class ApplicationDbContextInitialiser
         _roleManager = roleManager;
     }
 
-    public async Task InitialiseAsync()
+    public void MigrateDatabaseAndSeed()
     {
+        _logger.LogInformation("MigrateDatabaseAndSeedAsync started");
         try
         {
             if (_context.Database.IsNpgsql())
             {
-                await _context.Database.MigrateAsync();
+                var retryPolicy = Policy.Handle<Exception>()
+                    .WaitAndRetry(
+                        retryCount: 5,
+                        // 2 secs, 4, 8, 16, 32 
+                        sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                        onRetry: (exception, retryCount, context) =>
+                        {
+                            _logger.LogError("Retrying MigrateDatabaseAndSeed {RetryCount} of {ContextPolicyKey} at {ContextOperationKey}, due to: {Exception}", retryCount, context.PolicyKey,
+                                context.OperationKey, exception);
+                        });
+
+                retryPolicy.Execute(MigrateAndSeed);
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while initialising the database.");
+            _logger.LogError(ex, "An error occurred while initialising the database");
             throw;
         }
+
+        _logger.LogInformation("MigrateDatabaseAndSeedAsync completed");
     }
 
-    public async Task SeedAsync()
+    private void MigrateAndSeed()
     {
-        try
-        {
-            await TrySeedAsync();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while seeding the database.");
-            throw;
-        }
+        _context.Database.Migrate();
+        SeedDatabase().Wait();
     }
 
-    public async Task TrySeedAsync()
+    private async Task SeedDatabase()
     {
         // Default roles
         var administratorRole = new IdentityRole("Administrator");
