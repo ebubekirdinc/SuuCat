@@ -23,6 +23,11 @@ Development is still in progress.
 
 [Health Check with WatchDogs](https://github.com/ebubekirdinc/SuuCat/wiki/HealthCheck)
 
+---
+
+## SuuCat Microservices Architecture Overview
+![orderStateMachineHappyPathDiagram](img/microserviceArchitectureOverview.png)
+
 ## Todos ## 
 - Eventual Consistency with Change Data Capture(CDC) and Outbox pattern (Debezium) 
 - Outbox/Inbox patterns for inter-service communication 
