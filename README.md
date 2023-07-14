@@ -25,20 +25,26 @@ Development is still in progress.
 
 ---
 
+
 ## SuuCat Microservices Architecture Overview
 ![orderStateMachineHappyPathDiagram](img/microserviceArchitectureOverview.png)
+
+## Contributing
+:star: Star this project on GitHub - it's the first step to become a SuuCat supporter!
+
+Contributions are welcome! If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.   
+
+## Tech Stack
+![techStack](img/techStack.png)  
+  
+
+![screensOverview](img/screensOverview.png)
 
 ## Todos ## 
 - Eventual Consistency with Change Data Capture(CDC) and Outbox pattern (Debezium) 
 - Outbox/Inbox patterns for inter-service communication 
 - Integration Tests with Consumer Driven Contracts (Pact) 
-
-
-## Contributing
-:star: Star this project on GitHub - it's the first step to become a SuuCat supporter!
-
-Contributions are welcome! If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.
-
+ 
 
 ## References
 
