@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Account.Infrastructure.Consumers;
 
-public class UserCreatedEventComsumer : IConsumer<UserCreatedEvent>
+public class UserCreatedEventConsumer : IConsumer<UserCreatedEvent>
 {
     private readonly ApplicationDbContext _context;
 
-    public UserCreatedEventComsumer(ApplicationDbContext context)
+    public UserCreatedEventConsumer(ApplicationDbContext context)
     {
         _context = context;
     }

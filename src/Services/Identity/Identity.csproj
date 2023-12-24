@@ -16,7 +16,7 @@
         <PackageReference Include="IdentityServer4" Version="4.1.2"/>
         <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2"/>
         <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1"/>
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.12"/>
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
@@ -32,6 +32,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\BuildingBlocks\EventBus\EventBus.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\Tracing\Tracing.csproj" />
     </ItemGroup>
 
 </Project>

@@ -20,7 +20,9 @@ public static class SeriLogger
                 .WriteTo.Elasticsearch(
                     new ElasticsearchSinkOptions(new Uri(elasticUri))
                     {
-                        IndexFormat = $"suucat-applogs-{context.HostingEnvironment.ApplicationName?.ToLowerInvariant().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLowerInvariant().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
+                        IndexFormat = $"suucat-applogs-{context.HostingEnvironment.ApplicationName?.ToLowerInvariant().Replace(".", "-")}" +
+                                      $"-{context.HostingEnvironment.EnvironmentName?.ToLowerInvariant().Replace(".", "-")}" +
+                                      $"-{DateTime.UtcNow:yyyy-MM}",
                         AutoRegisterTemplate = true,
                         NumberOfShards = 2,
                         NumberOfReplicas = 1

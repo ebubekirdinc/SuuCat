@@ -298,3 +298,10 @@ services:
       - rabbitmq
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+  jaeger:
+    container_name: "jaeger"
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "16686:16686"

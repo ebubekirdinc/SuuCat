@@ -13,7 +13,7 @@
         <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.0.12" />
         <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.12" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,5 +32,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\BuildingBlocks\EventBus\EventBus.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\Logging\Logging.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\Tracing\Tracing.csproj" />
     </ItemGroup>
 </Project>
