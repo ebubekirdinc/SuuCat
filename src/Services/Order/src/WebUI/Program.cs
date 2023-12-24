@@ -7,6 +7,7 @@ using Order.Infrastructure.Persistence;
 using WebUI;
 using WebUI.Middlewares;
 using Serilog;
+using Tracing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Host.UseSerilog(SeriLogger.Configure);
+builder.Services.AddOpenTelemetry(builder.Configuration);
 
 var app = builder.Build();
 

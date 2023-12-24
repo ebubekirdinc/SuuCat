@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Shared.Dto;
+using Tracing;
 
 namespace Identity.Controllers;
 
@@ -36,6 +37,9 @@ public class AuthController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SignUp(SignupDto signupDto)
     {
+        using var activity = ActivitySourceProvider.Source.StartActivity();
+        activity?.AddEvent(new("User creation started."));
+        
         var user = new ApplicationUser
         {
             UserName = signupDto.Email,
@@ -56,6 +60,8 @@ public class AuthController : ControllerBase
             UserName = user.UserName
         });
 
+        activity?.AddEvent(new("User created successfully."));
+        
         return Ok(new ApiResult<string>(true, "User created successfully"));;
     }
 

@@ -15,6 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\BuildingBlocks\Logging\Logging.csproj" />
         <ProjectReference Include="..\..\..\..\BuildingBlocks\Shared\Shared.csproj" />
+        <ProjectReference Include="..\..\..\..\BuildingBlocks\Tracing\Tracing.csproj" />
         <ProjectReference Include="..\Application\Application.csproj" />
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>

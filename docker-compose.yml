@@ -93,6 +93,9 @@ services:
     build:
       context: .
       dockerfile: src/StateMachines/SagaOrchestrationStateMachine/Dockerfile
+      
+  jaeger:
+    image: jaegertracing/all-in-one:1.49
 
 volumes:
   notification_postgres_data:

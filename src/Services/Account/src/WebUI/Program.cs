@@ -5,6 +5,7 @@ using HealthChecks.UI.Client;
 using Logging;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
+using Tracing;
 using WebUI;
 using WebUI.Middlewares;
 
@@ -27,6 +28,7 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Host.UseSerilog(SeriLogger.Configure);
+builder.Services.AddOpenTelemetry(builder.Configuration);
 
 var app = builder.Build();
 

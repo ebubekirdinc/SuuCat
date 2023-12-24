@@ -44,7 +44,7 @@ public static class ConfigureServices
 
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<UserCreatedEventComsumer>();
+            x.AddConsumer<UserCreatedEventConsumer>();
             // Default Port : 5672
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -56,7 +56,7 @@ public static class ConfigureServices
 
                 cfg.ReceiveEndpoint("user-created-event-assessment-queue", e =>
                 {
-                    e.ConfigureConsumer<UserCreatedEventComsumer>(context);
+                    e.ConfigureConsumer<UserCreatedEventConsumer>(context);
                 });
             });
         });

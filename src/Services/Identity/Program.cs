@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using Tracing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,8 @@ builder.Services.AddMassTransit(x =>
         });
     });
 });
+
+builder.Services.AddOpenTelemetry(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
