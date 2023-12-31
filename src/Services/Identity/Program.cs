@@ -79,7 +79,8 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddOpenTelemetry(builder.Configuration);
+builder.Services.AddOpenTelemetryTracing(builder.Configuration);
+builder.Services.AddOpenTelemetryMetrics(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -103,6 +104,7 @@ app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();  endpoints.MapHealthChecks("/hc", new HealthCheckOptions()

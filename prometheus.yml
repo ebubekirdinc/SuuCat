@@ -1,0 +1,19 @@
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+  
+  - job_name: identity.api
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['identity.api:80']
+        
+  - job_name: order.api
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['order.api:80']
+        
+  - job_name: subscription.api
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['subscription.api:80']

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Subscription.Application.Common.Interfaces.MassTransit;
 using Subscription.Infrastructure.Persistence;
+using Tracing;
 
 namespace Subscription.Infrastructure.Consumers.Events;
 
@@ -63,6 +64,8 @@ public class OrderCreatedEventConsumer : IConsumer<IOrderCreatedEvent>
 
                 stock.Count -= item.Count;
                 await _context.SaveChangesAsync();
+                
+                OpenTelemetryMetric.StockCounter.Add(-item.Count);
             }
 
             _logger.LogInformation("Stock was reserved with CorrelationId Id: {MessageCorrelationId}", context.Message.CorrelationId);

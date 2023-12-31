@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Order.Application.Order.Commands.CreateOrder;
 using Shared.Dto;
+using Tracing;
 
 namespace WebUI.Controllers;
 
@@ -30,6 +31,8 @@ public class OrdersController : ApiControllerBase
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<ApiResult<string>>> CreateOrder([FromBody] CreateOrderCommand commandd)
     {
+        OpenTelemetryMetric.OrderStartedEventCounter.Add(1);
+        
         var command = new CreateOrderCommand { CustomerId = 1.ToString(), PaymentAccountId = "account_id_12",
             OrderItemList = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
         

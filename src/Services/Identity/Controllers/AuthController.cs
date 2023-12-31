@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mime;
+using EventBus.Constants;
 using EventBus.Events;
 using Identity.Models;
 using IdentityServer4;
@@ -59,7 +60,9 @@ public class AuthController : ControllerBase
             Email = user.Email,
             UserName = user.UserName
         });
-
+        
+        OpenTelemetryMetric.UserCreatedEventCounter.Add(1, new KeyValuePair<string, object>("event.name", "UserCreatedEvent"));
+        
         activity?.AddEvent(new("User created successfully."));
         
         return Ok(new ApiResult<string>(true, "User created successfully"));;

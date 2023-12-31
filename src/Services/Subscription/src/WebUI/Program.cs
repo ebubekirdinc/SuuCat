@@ -28,7 +28,8 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Host.UseSerilog(SeriLogger.Configure);
-builder.Services.AddOpenTelemetry(builder.Configuration);
+builder.Services.AddOpenTelemetryTracing(builder.Configuration);
+builder.Services.AddOpenTelemetryMetrics(builder.Configuration);
 
 var app = builder.Build();
 
@@ -63,6 +64,7 @@ app.UseRouting();
 app.UseAuthentication();
 // app.UseIdentityServer();
 app.UseAuthorization();
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
 app.MapControllerRoute(
     name: "default",

@@ -3,6 +3,7 @@ using Account.Infrastructure.Consumers;
 using Account.Infrastructure.Persistence;
 using Account.Infrastructure.Persistence.Interceptors;
 using Account.Infrastructure.Services;
+using EventBus.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -54,7 +55,7 @@ public static class ConfigureServices
                     host.Password("password");
                 });
 
-                cfg.ReceiveEndpoint("user-created-event-assessment-queue", e =>
+                cfg.ReceiveEndpoint(QueuesConsts.UserCreatedEventQueueName, e =>
                 {
                     e.ConfigureConsumer<UserCreatedEventConsumer>(context);
                 });
