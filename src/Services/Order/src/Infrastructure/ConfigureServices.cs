@@ -58,12 +58,12 @@ public static class ConfigureServices
                     host.Password("password");
                 });
 
-                cfg.ReceiveEndpoint(QueuesConsts.OrderCompletedEventtQueueName, x =>
+                cfg.ReceiveEndpoint(QueuesConsts.OrderCompletedEventQueueName, x =>
                 {
                     x.ConfigureConsumer<OrderCompletedEventConsumer>(context);
                 });
                 
-                cfg.ReceiveEndpoint(QueuesConsts.OrderFailedEventtQueueName, x =>
+                cfg.ReceiveEndpoint(QueuesConsts.OrderFailedEventQueueName, x =>
                 {
                     x.ConfigureConsumer<OrderFailedEventConsumer>(context);
                 });

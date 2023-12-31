@@ -41,7 +41,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddDbContext<StateMachineDbContext>(options =>
             options.UseNpgsql(hostContext.Configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddOpenTelemetry(hostContext.Configuration);
+        services.AddOpenTelemetryTracing(hostContext.Configuration);
         
         services.AddHostedService<Worker>();
     })

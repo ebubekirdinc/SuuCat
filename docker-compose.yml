@@ -97,6 +97,11 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:1.49
 
+  prometheus:
+    image: prom/prometheus:v2.48.1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
 volumes:
   notification_postgres_data:
   payment_postgres_data:

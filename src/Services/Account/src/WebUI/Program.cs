@@ -28,7 +28,7 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Host.UseSerilog(SeriLogger.Configure);
-builder.Services.AddOpenTelemetry(builder.Configuration);
+builder.Services.AddOpenTelemetryTracing(builder.Configuration);
 
 var app = builder.Build();
 

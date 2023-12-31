@@ -3,12 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 
 namespace Tracing;
 
 public static class OpenTelemetryExtensions
 {
-    public static void AddOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
+    public static void AddOpenTelemetryTracing(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<OpenTelemetryParameters>(configuration.GetSection("OpenTelemetry"));
         var openTelemetryParameters = configuration.GetSection("OpenTelemetry").Get<OpenTelemetryParameters>();
@@ -21,28 +23,22 @@ public static class OpenTelemetryExtensions
                 .AddSource(DiagnosticHeaders.DefaultListenerName)
                 .ConfigureResource(resource =>
                 {
-                    resource.AddService(openTelemetryParameters.ServiceName, 
+                    resource.AddService(openTelemetryParameters.ServiceName,
                         serviceVersion: openTelemetryParameters.ServiceVersion);
                 });
-            
+
             options.AddAspNetCoreInstrumentation(o =>
             {
                 // to trace only api requests
                 o.Filter = (context) => !string.IsNullOrEmpty(context.Request.Path.Value) && context.Request.Path.Value.Contains("Api", StringComparison.InvariantCulture);
-                
+
                 // example: only collect telemetry about HTTP GET requests
                 // return httpContext.Request.Method.Equals("GET");
-                
+
                 // enrich activity with http request and response
-                o.EnrichWithHttpRequest = (activity, httpRequest) =>
-                {
-                    activity.SetTag("requestProtocol", httpRequest.Protocol);
-                };
-                o.EnrichWithHttpResponse = (activity, httpResponse) =>
-                {
-                    activity.SetTag("responseLength", httpResponse.ContentLength);
-                };
-                
+                o.EnrichWithHttpRequest = (activity, httpRequest) => { activity.SetTag("requestProtocol", httpRequest.Protocol); };
+                o.EnrichWithHttpResponse = (activity, httpResponse) => { activity.SetTag("responseLength", httpResponse.ContentLength); };
+
                 // automatically sets Activity Status to Error if an unhandled exception is thrown
                 o.RecordException = true;
                 o.EnrichWithException = (activity, exception) =>
@@ -63,11 +59,27 @@ public static class OpenTelemetryExtensions
                     // activity.SetTag("db.name", stateDisplayName);
                 };
             });
-            
+
             //options.AddConsoleExporter();
-            
+
             options.AddOtlpExporter();
         });
+    }
+
+    public static void AddOpenTelemetryMetrics(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<OpenTelemetryParameters>(configuration.GetSection("OpenTelemetry"));
+        var openTelemetryParameters = configuration.GetSection("OpenTelemetry").Get<OpenTelemetryParameters>();
         
+        services.AddOpenTelemetry().WithMetrics(options =>
+        {
+            options.AddMeter(openTelemetryParameters.ServiceName);
+            options.AddPrometheusExporter();
+            options.ConfigureResource(resource =>
+            {
+                resource.AddService(serviceName: openTelemetryParameters.ServiceName,
+                    serviceVersion: openTelemetryParameters.ServiceVersion);
+            });
+        });
     }
 }
