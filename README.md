@@ -7,27 +7,32 @@ Development is still in progress.
 
 [Wiki](https://github.com/ebubekirdinc/SuuCat/wiki)  
 
-[Getting Started](https://github.com/ebubekirdinc/SuuCat/wiki/GettingStarted)  
+[Getting Started](https://github.com/ebubekirdinc/SuuCat/wiki/Getting-Started)
 
-[Saga Orchestration with MassTransit and RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/SagaOrchestration)
+[Saga Orchestration with MassTransit and RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/Saga-Orchestration-with-MassTransit-and-RabbitMq)
 
-[API Gateway with Ocelot](https://github.com/ebubekirdinc/SuuCat/wiki/ApiGateway)
+[Eventual Consistency with Integration Events using RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/Eventual-Consistency-with-Integration-Events-using-RabbitMq)
 
-[Authorization and Authentications with IdentityServer](https://github.com/ebubekirdinc/SuuCat/wiki/IdentityServer)
+[API Gateway with Ocelot](https://github.com/ebubekirdinc/SuuCat/wiki/API-Gateway-with-Ocelot)
 
-[Eventual Consistency with RabbitMq](https://github.com/ebubekirdinc/SuuCat/wiki/EventualConsistency)
+[Authorization and Authentication with IdentityServer](https://github.com/ebubekirdinc/SuuCat/wiki/Authorization-and-Authentication-with-IdentityServer)
 
-[Distributed Logging with ElasticSearch, Kibana and SeriLog](https://github.com/ebubekirdinc/SuuCat/wiki/DistributedLogging)
+[Distributed Logging with ElasticSearch, Kibana and SeriLog](https://github.com/ebubekirdinc/SuuCat/wiki/Distributed-Logging-with-ElasticSearch,-Kibana,-and-SeriLog)
 
-[Resiliency and Fault Tolerance with Polly](https://github.com/ebubekirdinc/SuuCat/wiki/Resiliency)
+[Resiliency and Fault Tolerance with Polly](https://github.com/ebubekirdinc/SuuCat/wiki/Resiliency-and-Fault-Tolerance-with-Polly)
 
-[Health Check with WatchDogs](https://github.com/ebubekirdinc/SuuCat/wiki/HealthCheck)
+[Health Check with WatchDogs](https://github.com/ebubekirdinc/SuuCat/wiki/Health-Check-with-WatchDogs)
+
+[Distributed Tracing with Jaeger and OpenTelemetry](https://github.com/ebubekirdinc/SuuCat/wiki/Distributed-Tracing-with-Jaeger-and-OpenTelemetry)
+
+[Metrics to Monitor Microservices with OpenTelemetry and Prometheus](https://github.com/ebubekirdinc/SuuCat/wiki/Metrics-to-Monitor-Microservices-with-OpenTelemetry)
+
 
 ---
 
 
 ## SuuCat Microservices Architecture Overview
-![orderStateMachineHappyPathDiagram](img/microserviceArchitectureOverview.png)
+![microserviceArchitectureOverview](img/microserviceArchitectureOverview.png)
 
 ## Contributing
 :star: Star this project on GitHub - it's the first step to become a SuuCat supporter!
