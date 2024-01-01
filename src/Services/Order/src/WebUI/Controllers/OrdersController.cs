@@ -29,12 +29,12 @@ public class OrdersController : ApiControllerBase
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResult<string>), StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<ApiResult<string>>> CreateOrder([FromBody] CreateOrderCommand commandd)
+    public async Task<ActionResult<ApiResult<string>>> CreateOrder([FromBody] CreateOrderCommand command)
     {
         OpenTelemetryMetric.OrderStartedEventCounter.Add(1);
         
-        var command = new CreateOrderCommand { CustomerId = 1.ToString(), PaymentAccountId = "account_id_12",
-            OrderItemList = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
+        // var command = new CreateOrderCommand { CustomerId = 1.ToString(), PaymentAccountId = "account_id_12",
+        //     OrderItemList = new List<OrderItemDto> { new OrderItemDto { ProductId = 25, Count = 5, Price = 100 } } };
         
         return await Mediator.Send(command);
     }

@@ -51,6 +51,7 @@ else
     app.UseHsts();
 }
 
+app.UseMiddleware<LogContextMiddleware>();
 app.ConfigureCustomExceptionMiddleware();
 app.UseHealthChecks("/health");
 // app.UseHttpsRedirection();

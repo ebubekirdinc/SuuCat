@@ -94,6 +94,7 @@ if (app.Environment.IsDevelopment())
         initialiser.MigrateDatabaseAndSeed();
     }
 }
+app.UseMiddleware<LogContextMiddleware>();
 // app.MapGet("/", () => "Hello World!");
 
 app.UseHealthChecks("/health");
