@@ -17,17 +17,17 @@ public class OrderStateMachine : MassTransitStateMachine<OrderStateInstance>
     private Event<ICreateOrderMessage> CreateOrderMessage { get; set; }
 
     // Events
-    private Event<IStockReservedEvent> StockReservedEvent { get; set; }
-    private Event<IStockReservationFailedEvent> StockReservationFailedEvent { get; set; }
-    private Event<IPaymentCompletedEvent> PaymentCompletedEvent { get; set; }
-    private Event<IPaymentFailedEvent> PaymentFailedEvent { get; set; }
+    public Event<IStockReservedEvent> StockReservedEvent { get; set; }
+    public Event<IStockReservationFailedEvent> StockReservationFailedEvent { get; set; }
+    public Event<IPaymentCompletedEvent> PaymentCompletedEvent { get; set; }
+    public Event<IPaymentFailedEvent> PaymentFailedEvent { get; set; }
 
     // States
-    private State OrderCreated { get; set; }
-    private State StockReserved { get; set; }
-    private State StockReservationFailed { get; set; }
-    private State PaymentCompleted { get; set; }
-    private State PaymentFailed { get; set; }
+    public State OrderCreated { get; set; }
+    public State StockReserved { get; set; }
+    public State StockReservationFailed { get; set; }
+    public State PaymentCompleted { get; set; }
+    public State PaymentFailed { get; set; }
 
     public OrderStateMachine() //ILogger<OrderStateMachine> logger)
     {
